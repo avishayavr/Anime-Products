@@ -1,41 +1,24 @@
 import React from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../FirebaseSingup/firebaseConfig";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-export default function LoginDemo() {
-  const navigate = useNavigate();
 
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
 
-  const login = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      // navigate("/products");
-      console.log(user);
-    } catch (error) {
-      console.log({ msg: error });
-    }
-  };
+export default function LoginDemo({email, password, loginFun, loginWithGoogleFun, btnText, linkDisplay}) {
+
+  
 
   return (
     <div className="relative w-full h-screen bg-[#eee] ">
       {/* form */}
       <div className="flex justify-center items-center h-full">
         <form className="max-w-[400px] w-full mx-auto sm:h-auto h-fit bg-white p-8">
-          <h2 className="text-4x font-bold text-center py-4">Brand.</h2>
+          <h2 className="text-4x font-bold text-center py-4">AA.</h2>
           <div className="flex flex-col mb-4">
             <label>Username</label>
             <input
-              onChange={(e) => setLoginEmail(e.target.value)}
+              onChange={(e) => email(e.target.value)}
               className="border relative bg-gray-100 p-2"
               type="text"
             />
@@ -43,24 +26,26 @@ export default function LoginDemo() {
           <div className="flex flex-col mb-4">
             <label>Password</label>
             <input
-              onChange={(e) => setLoginPassword(e.target.value)}
+              onChange={(e) => password(e.target.value)}
               className="border relative bg-gray-100 p-2"
               type="password"
             />
           </div>
           <button
-            onClick={()=> login()}
+            onClick={(e)=> loginFun(e)}
             className="w-full py-3 bg-[#2d2d2d] hover:bg-[#aaa] relative text-[#fff]"
           >
-            Sing In
+           {btnText}
           </button>
-          <p className="text-center mt-8">Not a member? Sing up now</p>
+          <Link to="/singupPage" style={{display: `${linkDisplay}`}}>
+          <p className='text-center mt-8' >Not a member? Sing up now</p>
+            </Link>
           <div className="flex justify-between mt-5">
             <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
               <AiFillFacebook className="text-xl" />
             </p>
-            <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
-              <FcGoogle />
+            <p onClick={loginWithGoogleFun} className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
+              <FcGoogle/>
             </p>
           </div>
         </form>
