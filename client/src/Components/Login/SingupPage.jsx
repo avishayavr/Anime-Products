@@ -6,22 +6,22 @@ import { useState } from "react";
 import LoginDemo from './templateDemo';
 
 
-export default function LoginPage() {
+export default function SingUpPage() {
 
     const navigate = useNavigate();
 
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [singUpEmail, setSingUpEmail] = useState("");
+  const [singUpPassword, setSingUpPassword] = useState("");
 
-  const login = async (e) => {
+  const singUpFun = async (e) => {
     e.preventDefault()
     try {
      const user = await createUserWithEmailAndPassword(
         auth,
-        loginEmail,
-        loginPassword
+        singUpEmail,
+        singUpPassword
       );
-      navigate("/products");
+      navigate("/login");
       console.log(user);
     } catch (error) {
       console.log({ msg: error });
@@ -29,8 +29,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
-        <LoginDemo email={setLoginEmail} password={setLoginPassword} loginFun={login} btnText={'Sing Up'} linkDisplay={"none"}/>
+    <div  >
+        <LoginDemo email={setSingUpEmail} password={setSingUpPassword} loginFun={singUpFun} btnText={'Sing Up'} linkDisplay={"none"}/>
     </div>
   )
 }

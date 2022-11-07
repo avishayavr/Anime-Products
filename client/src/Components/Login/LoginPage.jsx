@@ -4,8 +4,6 @@ import {auth} from '../FirebaseSingup/firebaseConfig'
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 import { useState, useEffect } from "react";
 import LoginDemo from './templateDemo';
-// import {auth} from '../FirebaseSingup/firebaseConfig'
-// import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 
@@ -15,6 +13,7 @@ export default function LoginPage() {
 
   const [user] = useAuthState(auth);
 
+  // states for email and password inputs
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -27,7 +26,7 @@ export default function LoginPage() {
         loginEmail,
         loginPassword
       );
-      navigate("/products");
+      navigate("/main");
       console.log(user);
     } catch (error) {
       console.log({ msg: error });
@@ -42,8 +41,9 @@ export default function LoginPage() {
     console.log(provider);
   }
 
+  // use effect to authorization
   useEffect(()=>{
-    if(user) navigate('/products')
+    if(user) navigate('/main')
   },[user])
 
 
