@@ -1,22 +1,24 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import {auth} from '../FirebaseSingup/firebaseConfig'
-import { signInWithEmailAndPassword} from 'firebase/auth'
-import {GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut} from 'firebase/auth'
-import { useState } from "react";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import { useState, useEffect } from "react";
 import LoginDemo from './templateDemo';
-import { useEffect } from 'react';
+// import {auth} from '../FirebaseSingup/firebaseConfig'
+// import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 export default function LoginPage() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [user, setUser] = useState({})
-
+// login function 
   const login = async (e) => {
     e.preventDefault()
     try {
@@ -32,62 +34,22 @@ export default function LoginPage() {
     }
   };
 
-  const logOut = () => {
-    signOut(auth);
+
+  // login with google fun
+  const singInWithGoogle = () =>{
+    const provider = new GoogleAuthProvider
+    signInWithPopup(auth, provider)
+    console.log(provider);
   }
 
-  // handle logout
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // login with google
-const loginWithGoogle = () =>{
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider);
-}
-
-// handle login with google 
-const handleGoogleLogin = async (e) =>{
-  e.preventDefault()
-  try {
-    await loginWithGoogle();
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-useEffect(() =>{
-  const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-    setUser(currentUser)
-    console.log('User', currentUser);
-  });
-
-  if(user != null) navigate('/products')
-
-  return () =>{
-    unsubscribe();
-  }
-
-}, [])
-
-// useEffect(()=>{
-// if(user != null) {
-//  setTimeout(()=>{
-//   navigate('/products')
-//   console.log(user);
-//  }, "5000")
-// }
-// }, [user])
+  useEffect(()=>{
+    if(user) navigate('/products')
+  },[user])
 
 
   return (
     <div>
-        <LoginDemo email={setLoginEmail} password={setLoginPassword} loginFun={login} btnText={'Sing In'}/>
+        <LoginDemo email={setLoginEmail} password={setLoginPassword} loginFun={login} singInWithGoogle={singInWithGoogle} btnText={'Sing In'}/>
     </div>
   )
 }

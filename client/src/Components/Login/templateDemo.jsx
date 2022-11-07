@@ -1,30 +1,10 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
-import { Link, Navigate, useNavigate} from "react-router-dom";
-import {UserAuth} from '../../context/AuthContext';
-import { useEffect } from "react";
+import { Link} from "react-router-dom";
 
 
-
-export default function LoginDemo({email, password, loginFun, btnText, linkDisplay}) {
-  const {googleSingIn, user} = UserAuth();
-  const navigate = useNavigate();
-
-  const handleGoogleSingIn = async (e) =>{
-    e.preventDefault()
-    try {
-      await googleSingIn();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(()=>{
-  if(user !=null){
-    navigate('/products')
-  }
-  },[user])
+export default function LoginDemo({email, password, loginFun, btnText, linkDisplay, singInWithGoogle}) {
 
   return (
     <div className="relative w-full h-screen bg-[#eee] ">
@@ -61,8 +41,8 @@ export default function LoginDemo({email, password, loginFun, btnText, linkDispl
             <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
               <AiFillFacebook className="text-xl" />
             </p>
-            <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
-              <FcGoogle onClick={handleGoogleSingIn}/>
+            <p onClick={singInWithGoogle} className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
+              <FcGoogle />
             </p>
           </div>
         </form>
