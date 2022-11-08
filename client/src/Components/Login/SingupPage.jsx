@@ -10,9 +10,11 @@ export default function SingUpPage() {
 
     const navigate = useNavigate();
 
+    // states for email and password inputs
   const [singUpEmail, setSingUpEmail] = useState("");
   const [singUpPassword, setSingUpPassword] = useState("");
 
+  // singUp function create another user
   const singUpFun = async (e) => {
     e.preventDefault()
     try {

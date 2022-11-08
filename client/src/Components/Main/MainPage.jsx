@@ -9,8 +9,6 @@ const logOut = () => {
 }
 
 
-
-
 export default function MainPage() {
   return (
     <div>

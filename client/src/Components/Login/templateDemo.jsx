@@ -41,6 +41,7 @@ export default function LoginDemo({email, password, loginFun, btnText, linkDispl
           <Link to="/singupPage" style={{display: `${linkDisplay}`}}>
           <p className='text-center mt-8' >Not a member? Sing up now</p>
             </Link>
+            {/* another div for login with google  */}
           <div  style={{display: `${linkDisplay}`}}className="flex justify-center mt-5 p-4">
             {/* <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
               <AiFillFacebook className="text-xl" />
