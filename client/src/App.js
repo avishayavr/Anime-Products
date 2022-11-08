@@ -4,6 +4,7 @@ import LoginPage from './Components/Login/LoginPage';
 import SingupPage from './Components/Login/SingupPage'
 import MainPage from './Components/Main/MainPage'
 import Products from './Components/Products/Products';
+import ProductTemplate from './Components/Products/ProductTemplate';
 // import LoginDemo from './Components/Login/templateDemo';
 // import InitialPage from './Components/Login/InitialPage';
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='singupPage' element={<SingupPage/>}/>
         <Route path='main' element={<MainPage/>}/>
         <Route path='products' element={<Products/>}/>
+        <Route path='product/:id' element={<Products/>}/>
       </Routes>
     </div>
   );
