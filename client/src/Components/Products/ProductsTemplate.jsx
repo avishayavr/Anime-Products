@@ -11,6 +11,7 @@ export default function ProductTemplate({productsData}) {
       <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {/* iteration on the data */}
         {productsData.map((product, i) => (
+          // first div for img
            <div key={i} className="group relative"> 
             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
               <img
@@ -19,6 +20,7 @@ export default function ProductTemplate({productsData}) {
                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                />
              </div>
+             {/* seconde div for link and price */}
              <div className="mt-4 flex justify-between">
                <div>
                  <h3 className="text-sm text-gray-700">
