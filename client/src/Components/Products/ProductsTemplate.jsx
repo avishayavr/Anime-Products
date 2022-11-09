@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 export default function ProductTemplate({productsData}) {
@@ -14,7 +14,7 @@ export default function ProductTemplate({productsData}) {
            <div key={i} className="group relative"> 
             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
               <img
-              src={product.image} 
+              src={product.image}
                  alt={""} 
                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                />
@@ -22,10 +22,10 @@ export default function ProductTemplate({productsData}) {
              <div className="mt-4 flex justify-between">
                <div>
                  <h3 className="text-sm text-gray-700">
-                   {/* <Link to={`/product/${product._id}`}>
+                    <Link to={`/product/${product._id}`}>
                      <span aria-hidden="true" className="absolute inset-0" />
                      {product.title}
-                   </Link> */}
+                   </Link> 
                  </h3>
                  {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
                </div>

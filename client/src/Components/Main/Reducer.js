@@ -5,11 +5,8 @@ let dataState = [];
 
 // get data function
 const getData = async ()=> {
-   const response = await axios.get('http://localhost:8000/api/products')
-    // .then((response) => response.json())
-    // .then((data)=> dataState.push(data.json()))
-    const data = response.data
-    dataState.push(data);
+   const {data} = await axios.get('http://localhost:8000/api/products')
+    dataState.push(...data);
 }
 
 getData();

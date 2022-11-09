@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-// import ProductsTemplate from './ProductsTemplate'
+import ProductsTemplate from './ProductsTemplate'
 
 export default function Products() {
  
@@ -14,7 +14,7 @@ export default function Products() {
 
   return (
     <div>Products<br/>
-    {/* <ProductsTemplate productsData={products}/> */}
+    <ProductsTemplate productsData={products}/>
     </div>
   )
 }
