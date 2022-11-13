@@ -19,7 +19,6 @@ function App() {
         <Route path='main' element={<MainPage/>}/>
         <Route path='products' element={<Products/>}/>
         <Route path='product/:id' element={<ProductPage/>}/>
-        {/* <Route path='product/:id' element={<Products/>}/> */}
       </Routes>
     </div>
   );

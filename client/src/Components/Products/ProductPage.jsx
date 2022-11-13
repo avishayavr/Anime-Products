@@ -1,23 +1,30 @@
+import axios from 'axios';
 import React from 'react'
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import ProductDemo from './ProductDemo'
 
 export default function ProductPage() {
 
+  const [product, setProduct] = useState({})
+
     const {id} = useParams();
-    const products = useSelector((state) => state.products);
-    const product = products.find(product=> product._id == id);
+    // console.log(id);
+
+    const getProduct = async ()=> {
+      const {data} = await axios.get(`http://localhost:8000/api/products/${id}`)
+      // console.log(data);
+      setProduct(data)
+    }
+    
 
     useEffect(()=>{
-        console.log(id);
-        console.log(product);
+        getProduct();
     },[])
 
   return (
     <div>ProductPage<br/>
-    <ProductDemo product={product}/>
+    <ProductDemo productData={product} sizes={product.sizes}/>
     </div>
   )
 }

@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 // get data by id function
 router.get("/:id", async (req, res) => {
     try {
-        const {id} = req.params
+        const id = req.params.id
       const product = await productsBLL.getDataById(id);
       res.status(200).json(product);
     } catch (e) {

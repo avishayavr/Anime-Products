@@ -1,37 +1,39 @@
 import React, { useState } from "react";
-import { RadioGroup } from "@headlessui/react";
+// import { RadioGroup} from '@headlessui/react';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
-export default function ProductDemo({ product }) {
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+export default function ProductDemo({ productData }) {
+    console.log(productData);
+//   const [selectedSize, setSelectedSize] = useState(sizes[2]);
+
 
   return (
     
     <div className=" flex justify-center mt-3">
-      <div className="container border border-[black] flex flex-col sm:flex-row justify-evenly p-7">
+      <div className="bg-[#aaa] rounded-xl  flex flex-col sm:flex-row justify-evenly p-7">
         {/* left side */}
-        <div className="border border-[black] h-full bg-[#aaa] ">
-          <img width={"600px"} src={product.image} alt="" />
+        <div className="border flex items-center p-10 border-[#2d2d2d] ">
+          <img className="border-2 w-100 rounded-md" src={productData.image} alt="" />
         </div>
 
         {/* right side */}
-        <div className="border border-[black] flex justify-between flex-col text-xl h-full">
+        <div className="border border-[#2d2d2d] p-10 flex justify-between flex-col text-xl ">
           {/* div for text  */}
-          <div>
-            <h1 className="font-bold">{product.title}</h1>
-            <p className="flex justify-start">{product.price}$</p>
+          <div className="p-5 text-[#2d2d2d]">
+            <h1 className="font-bold">{productData.title}</h1>
+            <p className="flex justify-start">{productData.price}$</p>
           </div>
 
           {/* Sizes */}
-          <div className="mt-10">
+          {/* <div className="mt-10 p-5">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-medium text-gray-900">Size</h4>
+              <h4 className="text-sm font-medium text-[#2d2d2d]">Size</h4>
               <a
                 href="#"
-                className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                className="text-sm font-medium text-[#2d2d2d]"
               >
                 Size guide
               </a>
@@ -43,11 +45,10 @@ export default function ProductDemo({ product }) {
               className="mt-4"
             >
               <RadioGroup.Label className="sr-only">
-                {" "}
-                Choose a size{" "}
+                Choose a size
               </RadioGroup.Label>
               <div className="grid grid-cols-4 gap-4">
-                {product.sizes.map((size) => (
+                {!sizes.map((size) => (
                   <RadioGroup.Option
                     key={size.name}
                     value={size}
@@ -55,9 +56,9 @@ export default function ProductDemo({ product }) {
                     className={({ active }) =>
                       classNames(
                         size.inStock
-                          ? "bg-white shadow-sm text-gray-900 cursor-pointer"
+                          ? "bg-[#fff] shadow-sm text-[#2d2d2d] cursor-pointer"
                           : "bg-gray-50 text-gray-200 cursor-not-allowed",
-                        active ? "ring-2 ring-indigo-500" : "",
+                        active ? "ring-2 ring-[#2d2d2d]" : "",
                         "group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1"
                       )
                     }
@@ -72,7 +73,7 @@ export default function ProductDemo({ product }) {
                             className={classNames(
                               active ? "border" : "border-2",
                               checked
-                                ? "border-indigo-500"
+                                ? "border-[#2d2d2d]"
                                 : "border-transparent",
                               "pointer-events-none absolute -inset-px rounded-md"
                             )}
@@ -105,12 +106,12 @@ export default function ProductDemo({ product }) {
                 ))}
               </div>
             </RadioGroup>
-          </div>
+          </div> */}
 
           {/* button */}
           <button
             type="submit"
-            className="mt-6  flex w-full justify-center  rounded-md border border-transparent bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"
           >
             Add to bag
           </button>
