@@ -1,3 +1,3 @@
-get http://localhost:8000/api/products/63601f885d4dcc33f4315ec8
+get http://localhost:8000/api/cart
 
 
