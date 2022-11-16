@@ -1,30 +1,62 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 import React, { useState } from "react";
 
-
 export default function ProductDemo({ productData }) {
-    // console.log(productData);
+  // console.log(productData);
 
-    // state for the cart new product quantity
+  // state for the cart new product quantity
   const [cartProductQuantity, setCartProductQuantity] = useState(0);
 
+  //   function to add product to cart
+  const addToCart = async () => {
+    // getting the cart data
+    const { data } = await axios.get("http://localhost:8000/api/cart");
+    // console.log(data);
 
-//   function to add product to cart
-const addToCart = async ()=>{
-    const cartProduct = {title: productData.title, price: Number(productData.price * cartProductQuantity), quantity: +cartProductQuantity, image:productData.image};
-    const response = await axios.post('http://localhost:8000/api/cart', cartProduct)
-    
-} 
+    if (productData.quantity > 0) {
+      // iteration on the cart the check if the product already in the cart
+      data.map(async (product) => {
+        if (product.title != productData.title) {
+          // add to cart
+          const cartProduct = {
+            title: productData.title,
+            price: Number(productData.price * cartProductQuantity),
+            quantity: +cartProductQuantity,
+            image: productData.image,
+          };
+          await axios.post("http://localhost:8000/api/cart", cartProduct);
+        } else {
+          // update the cart
+          product.quantity = product.quantity + cartProductQuantity;
+          await axios.put(
+            `http://localhost:8000/api/cart/${product._id}`,
+            product
+          );
+        }
 
-
+        // update products data
+        productData.quantity = productData.quantity - cartProductQuantity;
+        await axios.put(
+          `http://localhost:8000/api/products/${productData._id}`,
+          productData
+        );
+      });
+    } else {
+      prompt("Sorry this product is out of stock");
+    }
+  };
 
   return (
-    
     <div className=" flex justify-center mt-3">
       <div className="bg-[#aaa] rounded-xl  flex flex-col sm:flex-row justify-evenly p-7">
         {/* left side */}
         <div className="border flex items-center p-10 border-[#2d2d2d] ">
-          <img className="border-2 w-100 rounded-md" src={productData.image} alt="" />
+          <img
+            className="border-2 w-100 rounded-md"
+            src={productData.image}
+            alt=""
+          />
         </div>
 
         {/* right side */}
@@ -115,12 +147,15 @@ const addToCart = async ()=>{
               </div>
             </RadioGroup>
           </div> */}
-
-          <input name="quantity" type="Number" onClick={(e)=> setCartProductQuantity(e.target.value)}/>
+          <input
+            name="quantity"
+            type="Number"
+            onClick={(e) => setCartProductQuantity(e.target.value)}
+          />
 
           {/* button */}
           <button
-          onClick={addToCart}
+            onClick={addToCart}
             type="submit"
             className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"
           >
@@ -131,22 +166,21 @@ const addToCart = async ()=>{
     </div>
 
     // new demo
-//  <div className="flex justify-center ">   
-// <div className = "flex sm:flex-row flex-col items-center w-full max-w-xl bg-[#aaa] rounded-lg shadow-md border-[#2d2d2d] border-solid">
-//     <a href="#">
-//         <img className = "p-8 rounded-t-lg" src={product.image} alt="product image"/>
-//     </a>
-//     <div className = "px-5 pb-5">
-//         <a href="#">
-//             <h5 className = "text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.title}</h5>
-//         </a>
-//         <div className = "flex justify-between items-center">
-//             <span className = "text-3xl font-bold text-gray-900 dark:text-white">{product.price}$</span>
-//             <a href="#" className = "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-//         </div>
-//     </div>
-// </div>
-// </div>
-
+    //  <div className="flex justify-center ">
+    // <div className = "flex sm:flex-row flex-col items-center w-full max-w-xl bg-[#aaa] rounded-lg shadow-md border-[#2d2d2d] border-solid">
+    //     <a href="#">
+    //         <img className = "p-8 rounded-t-lg" src={product.image} alt="product image"/>
+    //     </a>
+    //     <div className = "px-5 pb-5">
+    //         <a href="#">
+    //             <h5 className = "text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.title}</h5>
+    //         </a>
+    //         <div className = "flex justify-between items-center">
+    //             <span className = "text-3xl font-bold text-gray-900 dark:text-white">{product.price}$</span>
+    //             <a href="#" className = "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+    //         </div>
+    //     </div>
+    // </div>
+    // </div>
   );
 }

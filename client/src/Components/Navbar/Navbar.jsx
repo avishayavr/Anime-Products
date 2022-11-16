@@ -18,6 +18,12 @@ export default function Navbar() {
         setCart([...data])
     }
 
+    // function to delete the product in the cart 
+const deleteProductCart = async (id)=>{
+  await axios.delete(`http://localhost:8000/api/cart/${id}`)
+  console.log(id);
+  }
+
     // function to change the open state
     const openCart = ()=>{
         setOpen(true)
@@ -58,7 +64,7 @@ export default function Navbar() {
         <BsFillBagFill className="text-3xl" />
         <span className="absolute top-4  text-[#2d2d2d]">{cart.length}</span>
       </div>
-      <Cart open={open} setOpen={setOpen} products={cart}/>
+      <Cart open={open} setOpen={setOpen} products={cart} deleteProduct={deleteProductCart}/>
     </div>
   );
 }

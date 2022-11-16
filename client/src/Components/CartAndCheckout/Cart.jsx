@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-export default function Cart({ open, setOpen, products }) {
+export default function Cart({ open, setOpen, products, deleteProduct }) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -87,6 +87,7 @@ export default function Cart({ open, setOpen, products }) {
 
                                       <div className="flex">
                                         <button
+                                        onClick={()=>deleteProduct(product._id)}
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
