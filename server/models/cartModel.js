@@ -8,5 +8,5 @@ const cartSchema = new mongoose.Schema({
     image:String
 })
 
-const model = mongoose.model("cart", cartSchema);
+const model = mongoose.model("carts", cartSchema);
 module.exports = model;

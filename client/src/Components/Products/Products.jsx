@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductsTemplate from "./ProductsTemplate";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -18,7 +19,7 @@ export default function Products() {
 
   return (
     <div>
-      Products
+      <Navbar/>
       <br />
       <ProductsTemplate productsData={products} />
     </div>

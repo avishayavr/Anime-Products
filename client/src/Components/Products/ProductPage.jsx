@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
+import Navbar from '../Navbar/Navbar';
 import ProductDemo from './ProductDemo'
 
 export default function ProductPage() {
@@ -23,7 +24,9 @@ export default function ProductPage() {
     },[])
 
   return (
-    <div>ProductPage<br/>
+    <div>
+      <Navbar/>
+      <br/>
     <ProductDemo productData={product} sizes={product.sizes}/>
     </div>
   )

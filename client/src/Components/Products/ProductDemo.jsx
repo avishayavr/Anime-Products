@@ -1,13 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
-// import { RadioGroup} from '@headlessui/react';
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(" ");
-// }
 
 export default function ProductDemo({ productData }) {
-    console.log(productData);
-//   const [selectedSize, setSelectedSize] = useState(sizes[2]);
+    // console.log(productData);
+
+    // state for the cart new product quantity
+  const [cartProductQuantity, setCartProductQuantity] = useState(0);
+
+
+//   function to add product to cart
+const addToCart = async ()=>{
+    const cartProduct = {title: productData.title, price: Number(productData.price * cartProductQuantity), quantity: +cartProductQuantity, image:productData.image};
+    const response = await axios.post('http://localhost:8000/api/cart', cartProduct)
+    
+} 
+
 
 
   return (
@@ -108,8 +116,11 @@ export default function ProductDemo({ productData }) {
             </RadioGroup>
           </div> */}
 
+          <input name="quantity" type="Number" onClick={(e)=> setCartProductQuantity(e.target.value)}/>
+
           {/* button */}
           <button
+          onClick={addToCart}
             type="submit"
             className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"
           >
