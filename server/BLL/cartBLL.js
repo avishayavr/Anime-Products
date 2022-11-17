@@ -14,6 +14,7 @@ exports.getDataById = async (id) => {
 exports.createProduct = async (obj) => {
   try {
     const newProduct = new cartModel({
+      productId:obj.id,
       title: obj.title,
       price: obj.price,
       quantity: obj.quantity,
