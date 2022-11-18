@@ -8,6 +8,5 @@ const cartSchema = new mongoose.Schema({
     quantity:Number,
     image:String
 })
-
 const model = mongoose.model("carts", cartSchema);
 module.exports = model;

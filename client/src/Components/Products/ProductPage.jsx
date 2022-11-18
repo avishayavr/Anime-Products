@@ -27,7 +27,7 @@ export default function ProductPage() {
     <div>
       <Navbar/>
       <br/>
-    <ProductDemo productData={product} sizes={product.sizes}/>
+    <ProductDemo productData={product} sizes={product.sizes} />
     </div>
   )
 }

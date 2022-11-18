@@ -14,13 +14,13 @@ exports.getDataById = async (id) => {
 exports.createProduct = async (obj) => {
   try {
     const newProduct = new cartModel({
-      productId:obj.id,
+      productId:obj._id,
       title: obj.title,
       price: obj.price,
       quantity: obj.quantity,
       image: obj.image,
     });
-
+console.log(newProduct);
     await newProduct.save();
     return "created";
   } catch (error) {

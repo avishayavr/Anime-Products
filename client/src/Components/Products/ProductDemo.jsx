@@ -15,7 +15,7 @@ export default function ProductDemo({ productData }) {
 
     //  new product to add to the cart
     const cartProduct = {
-      productId:`${productData._id}`,
+      _id:productData._id,
       title: productData.title,
       price: Number(productData.price * cartProductQuantity),
       quantity: +cartProductQuantity,
@@ -23,46 +23,45 @@ export default function ProductDemo({ productData }) {
     };
 
     console.log(cartProduct);
-    await axios.post("http://localhost:8000/api/cart", cartProduct);
+    // await axios.post("http://localhost:8000/api/cart", cartProduct);
 
 
-    // if (data.length > 0) {
-    //   // iteration on the cart the check if the product already in the cart
-    //   data.map(async (product) => {
-    //     if (product.title.includes(productData.title) === true) {
-    //        // update the cart
-    //        product.quantity = Number(product.quantity) + Number(cartProductQuantity);
-    //        product.price = Number(product.quantity * productData.price)
-    //        await axios.put(`http://localhost:8000/api/cart/${product._id}`,product);
+    if (data.length > 0) {
+      // iteration on the cart the check if the product already in the cart
+      data.map(async (product) => {
+        if (product.title.includes(productData.title) === true) {
+           // update the cart
+           product.quantity = Number(product.quantity) + Number(cartProductQuantity);
+           product.price = Number(product.quantity * productData.price)
+           await axios.put(`http://localhost:8000/api/cart/${product._id}`,product);
  
-    //        // update products data
-    //        productData.quantity = productData.quantity - cartProductQuantity;
-    //        await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
+           // update products data
+           productData.quantity = productData.quantity - cartProductQuantity;
+           await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
 
-    //       // console.log(cartProduct);
-    //     } 
-        // if (product.title.includes(productData.title) === false) {
-        //   // add to cart
-        //   await axios.post("http://localhost:8000/api/cart", cartProduct);
+          // console.log(cartProduct);
+        }else if (product.title.includes(productData.title) === false) {
+          // add to cart
+          await axios.post("http://localhost:8000/api/cart", cartProduct);
 
-        //   // update products data
-        //   productData.quantity = productData.quantity - cartProductQuantity;
-        //   await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
-        // }
-    //   });
-    // } else {
-    //   // add to cart
-      // axios.post("http://localhost:8000/api/cart", cartProduct);
+          // update products data
+          productData.quantity = productData.quantity - cartProductQuantity;
+          await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
+        }
+      });
+    } else {
+      // add to cart
+      axios.post("http://localhost:8000/api/cart", cartProduct);
 
-    //   // update products data
-    //   productData.quantity = productData.quantity - cartProductQuantity;
-    //   await axios.put(
-    //     `http://localhost:8000/api/products/${productData._id}`,
-    //     productData
-    //   );
+      // update products data
+      productData.quantity = productData.quantity - cartProductQuantity;
+      await axios.put(
+        `http://localhost:8000/api/products/${productData._id}`,
+        productData
+      );
 
-    //   // console.log(cartProduct);
-    // }
+      // console.log(cartProduct);
+    }
   };
   
 
