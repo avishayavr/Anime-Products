@@ -16,7 +16,7 @@ export default function ProductTemplate({productsData}) {
           {/* <button onClick={click}>V</button> */}
       <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {/* iteration on the data */}
-        {productsData.map((product, i) => (
+        {productsData?.map((product, i) => (
           // first div for img
            <div key={i} className="group relative"> 
             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">

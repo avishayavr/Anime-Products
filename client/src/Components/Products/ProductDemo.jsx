@@ -1,68 +1,68 @@
-import axios from "axios";
-import React, { useState } from "react";
+// import axios from "axios";
+import React from "react";
 // import { useEffect } from "react";
 
 export default function ProductDemo({ productData }) {
 
-  // state for the cart new product quantity
-  const [cartProductQuantity, setCartProductQuantity] = useState(0);
+  // // state for the cart new product quantity
+  // const [cartProductQuantity, setCartProductQuantity] = useState(0);
 
-  //   function to add product to cart
-  const addToCart = async () => {
-    // getting the cart data
-    const { data } = await axios.get("http://localhost:8000/api/cart");
-    // console.log(data);
+  // //   function to add product to cart
+  // const addToCart = async () => {
+  //   // getting the cart data
+  //   const { data } = await axios.get("http://localhost:8000/api/cart");
+  //   // console.log(data);
 
-    //  new product to add to the cart
-    const cartProduct = {
-      _id:productData._id,
-      title: productData.title,
-      price: Number(productData.price * cartProductQuantity),
-      quantity: +cartProductQuantity,
-      image: productData.image,
-    };
+  //   //  new product to add to the cart
+  //   const cartProduct = {
+  //     _id:productData._id,
+  //     title: productData.title,
+  //     price: Number(productData.price * cartProductQuantity),
+  //     quantity: +cartProductQuantity,
+  //     image: productData.image,
+  //   };
 
-    console.log(cartProduct);
-    // await axios.post("http://localhost:8000/api/cart", cartProduct);
+  //   console.log(cartProduct);
+  //   // await axios.post("http://localhost:8000/api/cart", cartProduct);
 
 
-    if (data.length > 0) {
-      // iteration on the cart the check if the product already in the cart
-      data.map(async (product) => {
-        if (product.title.includes(productData.title) === true) {
-           // update the cart
-           product.quantity = Number(product.quantity) + Number(cartProductQuantity);
-           product.price = Number(product.quantity * productData.price)
-           await axios.put(`http://localhost:8000/api/cart/${product._id}`,product);
+  //   if (data.length > 0) {
+  //     // iteration on the cart the check if the product already in the cart
+  //     data.map(async (product) => {
+  //       if (product.title.includes(productData.title) === true) {
+  //          // update the cart
+  //          product.quantity = Number(product.quantity) + Number(cartProductQuantity);
+  //          product.price = Number(product.quantity * productData.price)
+  //          await axios.put(`http://localhost:8000/api/cart/${product._id}`,product);
  
-           // update products data
-           productData.quantity = productData.quantity - cartProductQuantity;
-           await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
+  //          // update products data
+  //          productData.quantity = productData.quantity - cartProductQuantity;
+  //          await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
 
-          // console.log(cartProduct);
-        }else if (product.title.includes(productData.title) === false) {
-          // add to cart
-          await axios.post("http://localhost:8000/api/cart", cartProduct);
+  //         // console.log(cartProduct);
+  //       }else if (product.title.includes(productData.title) === false) {
+  //         // add to cart
+  //         await axios.post("http://localhost:8000/api/cart", cartProduct);
 
-          // update products data
-          productData.quantity = productData.quantity - cartProductQuantity;
-          await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
-        }
-      });
-    } else {
-      // add to cart
-      axios.post("http://localhost:8000/api/cart", cartProduct);
+  //         // update products data
+  //         productData.quantity = productData.quantity - cartProductQuantity;
+  //         await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
+  //       }
+  //     });
+  //   } else {
+  //     // add to cart
+  //     axios.post("http://localhost:8000/api/cart", cartProduct);
 
-      // update products data
-      productData.quantity = productData.quantity - cartProductQuantity;
-      await axios.put(
-        `http://localhost:8000/api/products/${productData._id}`,
-        productData
-      );
+  //     // update products data
+  //     productData.quantity = productData.quantity - cartProductQuantity;
+  //     await axios.put(
+  //       `http://localhost:8000/api/products/${productData._id}`,
+  //       productData
+  //     );
 
-      // console.log(cartProduct);
-    }
-  };
+  //     // console.log(cartProduct);
+  //   }
+  // };
   
 
   return (
@@ -168,12 +168,12 @@ export default function ProductDemo({ productData }) {
           <input
             name="quantity"
             type="Number"
-            onClick={(e) => setCartProductQuantity(e.target.value)}
+            // onClick={(e) => setCartProductQuantity(e.target.value)}
           />
 
           {/* button */}
           <button
-            onClick={addToCart}
+            // onClick={addToCart}
             disabled={productData.quantity == 0 ? true : false}
             type="submit"
             className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"

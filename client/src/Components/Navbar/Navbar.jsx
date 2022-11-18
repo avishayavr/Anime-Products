@@ -14,7 +14,7 @@ export default function Navbar() {
     // getting the cart data
     const getCart = async ()=>{
         const {data} = await axios.get('http://localhost:8000/api/cart')
-        console.log(data);
+        // console.log(data);
         setCart([...data])
     }
 
@@ -52,6 +52,9 @@ const deleteProductCart = async (id)=>{
         <div className="flex p-3">
           <p className="p-3">
             <Link to={"/products"}>Products</Link>
+          </p>
+          <p className="p-3">
+            <Link to={"/login"}>Login</Link>
           </p>
           <button className="p-3" onClick={() => logOut()}>
             Log Out
