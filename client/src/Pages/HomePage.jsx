@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../Components/Navbar/Navbar'
+import FullNavbar from '../Components/Navbar/FullNavbar'
 
 export default function HomePage() {
   return (
     <div>
-      <Navbar/>
+      <FullNavbar/>
     </div>
   )
 }
