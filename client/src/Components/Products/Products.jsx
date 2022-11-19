@@ -1,25 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProductsTemplate from "./ProductsTemplate";
-import axios from "axios";
-import { addUser } from "../../redux/ProductsReducer";
-import { useEffect } from "react";
-// import Navbar from "../Navbar/Navbar";
+// import axios from "axios";
+// import { addUser } from "../../redux/ProductsReducer";
+// import { useEffect } from "react";
 
 export default function Products() {
   // getting my global state with use selector
   const products = useSelector((state) => state.products.value);
   console.log(products);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const getData = async () => {
-    const { data } = await axios.get("http://localhost:8000/api/products");
-    if(products.length == 0) data.map((product) => dispatch(addUser(product)));
-  };
+  // const getData = async () => {
+  //   const { data } = await axios.get("http://localhost:8000/api/products");
+  //   if(products.length == 0) data.map((product) => dispatch(addUser(product)));
+  // };
 
-  useEffect(()=>{
-    getData()
-  }, [])
+  // useEffect(()=>{
+  //   getData()
+  // }, [])
 
   return (
     <div>

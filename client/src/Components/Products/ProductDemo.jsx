@@ -72,7 +72,7 @@ export default function ProductDemo({ productData }) {
         <div className="border flex items-center p-10 border-[#2d2d2d] ">
           <img
             className="border-2 w-100 rounded-md"
-            src={productData.image}
+            src={productData?.image}
             alt=""
           />
         </div>
@@ -81,8 +81,8 @@ export default function ProductDemo({ productData }) {
         <div className="border border-[#2d2d2d] p-10 flex justify-between flex-col text-xl ">
           {/* div for text  */}
           <div className="p-5 text-[#2d2d2d]">
-            <h1 className="font-bold">{productData.title}</h1>
-            <p className="flex justify-start">{productData.price}$</p>
+            <h1 className="font-bold">{productData?.title}</h1>
+            <p className="flex justify-start">{productData?.price}$</p>
           </div>
 
           {/* Sizes */}
@@ -174,11 +174,11 @@ export default function ProductDemo({ productData }) {
           {/* button */}
           <button
             // onClick={addToCart}
-            disabled={productData.quantity == 0 ? true : false}
+            disabled={productData?.quantity == 0 ? true : false}
             type="submit"
             className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"
           >
-            {productData.quantity == 0 ? "out of stock" : "add to cart"}
+            {productData?.quantity == 0 ? "out of stock" : "add to cart"}
           </button>
         </div>
       </div>

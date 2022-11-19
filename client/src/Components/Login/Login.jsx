@@ -7,7 +7,7 @@ import LoginDemo from './templateDemo';
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 
-export default function LoginPage() {
+export default function Login() {
 
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export default function LoginPage() {
         loginEmail,
         loginPassword
       );
-      navigate("/main");
+      navigate("/products");
       console.log(user);
     } catch (error) {
       console.log({ msg: error });
@@ -43,7 +43,7 @@ export default function LoginPage() {
 
   // use effect to authorization
   useEffect(()=>{
-    if(user) navigate('/main')
+    if(user) navigate('/products')
   },[user])
 
 
