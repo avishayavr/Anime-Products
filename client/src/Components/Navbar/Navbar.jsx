@@ -1,35 +1,24 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-// import { auth } from "../FirebaseSingup/firebaseConfig";
-// import { signOut } from "firebase/auth";
+import {useNavigate } from "react-router-dom";
 import { BsFillBagFill } from "react-icons/bs";
-// import Cart from "../CartAndCheckout/Cart";
-// import axios from "axios";
-// import { useAuthState } from "react-firebase-hooks/auth";
+import { useState } from "react";
+import { useEffect } from "react";
+
 
 export default function Navbar({openCart, logOut, user}) {
-  // const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  // // user
-  // const [user] = useAuthState(auth);
+  const [cart, setCart] = useState([])
 
-  // // function to change the open state
-  // const openCartFun = () => {
-  //   setOpen(!open);
-  // };
-
-  // // function to logout
-  // const logOutFun = () => {
-  //   // console.log(auth);
-  //   signOut(auth);
-  //   navigate("/");
-  // };
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, []);
+  useEffect(()=>{
+    let storage = []
+    Object.keys(sessionStorage).forEach(key=>{
+      storage.push(JSON.parse(sessionStorage.getItem(key)))
+    })
+    setCart(storage)
+    // console.log(cart);
+  },[])
 
   return (
     <div className="bg-[#2d2d2d] flex justify-between items-center">
@@ -62,7 +51,7 @@ export default function Navbar({openCart, logOut, user}) {
         onClick={openCart}
         className="text-[#fff] relative flex justify-center p-3 hover:cursor-pointer">
         <BsFillBagFill className="text-3xl"/>
-        <span className="absolute top-4  text-[#2d2d2d]">0</span>
+        <span className="absolute top-4  text-[#2d2d2d]">{ cart.length }</span>
       </div>
       {/* <Cart open={open} setOpen={setOpen} /> */}
     </div>

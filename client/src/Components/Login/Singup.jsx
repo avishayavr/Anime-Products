@@ -6,7 +6,7 @@ import { useState } from "react";
 import LoginDemo from './templateDemo';
 
 
-export default function SingUpPage() {
+export default function SingUp() {
 
     const navigate = useNavigate();
 

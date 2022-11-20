@@ -11,10 +11,12 @@ import axios from "axios";
 import { addUser } from "./redux/ProductsReducer";
 import { useEffect } from "react";
 
+
 function App() {
   const products = useSelector((state) => state.products.value);
   // console.log(products);
   const dispatch = useDispatch();
+
 
   const getData = async () => {
     const { data } = await axios.get("http://localhost:8000/api/products");

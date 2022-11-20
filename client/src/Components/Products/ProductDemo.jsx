@@ -1,69 +1,96 @@
-// import axios from "axios";
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { auth } from "../FirebaseSingup/firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/ProductsReducer";
 // import { useEffect } from "react";
 
 export default function ProductDemo({ productData }) {
+  const dispatch = useDispatch();
+  const [user] = useAuthState(auth);
 
-  // // state for the cart new product quantity
-  // const [cartProductQuantity, setCartProductQuantity] = useState(0);
+  // state for the cart new product quantity
+  const [cartProductQuantity, setCartProductQuantity] = useState(0);
 
-  // //   function to add product to cart
-  // const addToCart = async () => {
-  //   // getting the cart data
-  //   const { data } = await axios.get("http://localhost:8000/api/cart");
-  //   // console.log(data);
+  //   function to add product to cart
+  const addToCart = () => {
+    //  new product to add to the cart
+    const cartProduct = {
+      _id: productData._id,
+      title: productData.title,
+      price: Number(productData.price * cartProductQuantity),
+      quantity: +cartProductQuantity,
+      image: productData.image,
+    };
 
-  //   //  new product to add to the cart
-  //   const cartProduct = {
-  //     _id:productData._id,
-  //     title: productData.title,
-  //     price: Number(productData.price * cartProductQuantity),
-  //     quantity: +cartProductQuantity,
-  //     image: productData.image,
-  //   };
+    // function to get an array of all the data
+    let storage = [];
+    Object.keys(sessionStorage).forEach((key) => {
+      storage.push(JSON.parse(sessionStorage.getItem(key)));
+    });
+    // console.log(storage);
 
-  //   console.log(cartProduct);
-  //   // await axios.post("http://localhost:8000/api/cart", cartProduct);
+    if (storage?.length > 0) {
+      // iteration on the cart the check if the product already in the cart
+      storage?.map(async (product) => {
+        if (product.title.includes(productData.title) === true) {
+          // update the cart
+          cartProduct.quantity = Number(
+            +product.quantity + +cartProductQuantity
+          );
+          cartProduct.price = Number(productData.price * cartProduct.quantity);
+          sessionStorage.removeItem(`${productData.title}`);
+          sessionStorage.setItem(
+            `${productData.title}`,
+            JSON.stringify(cartProduct)
+          );
 
+          // // update products data
+          
 
-  //   if (data.length > 0) {
-  //     // iteration on the cart the check if the product already in the cart
-  //     data.map(async (product) => {
-  //       if (product.title.includes(productData.title) === true) {
-  //          // update the cart
-  //          product.quantity = Number(product.quantity) + Number(cartProductQuantity);
-  //          product.price = Number(product.quantity * productData.price)
-  //          await axios.put(`http://localhost:8000/api/cart/${product._id}`,product);
- 
-  //          // update products data
-  //          productData.quantity = productData.quantity - cartProductQuantity;
-  //          await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
+          // console.log("matched");
+        } else if (product.title.includes(productData.title) === false) {
+          // add to cart
+          sessionStorage.setItem(
+            `${productData.title}`,
+            JSON.stringify(cartProduct)
+          );
 
-  //         // console.log(cartProduct);
-  //       }else if (product.title.includes(productData.title) === false) {
-  //         // add to cart
-  //         await axios.post("http://localhost:8000/api/cart", cartProduct);
+          // // update products data
+          // const productFromDataBase = await axios.get(
+          //   `http://localhost:8000/api/products/${productData.id}`
+          // );
+          // productFromDataBase.quantity = Number(
+          //   +productFromDataBase.quantity - +cartProduct.quantity
+          // );
+          // await axios.put(
+          //   `http://localhost:8000/api/products/${productData.id}`,
+          //   productFromDataBase
+          // );
+          // console.log("not matched");
+        }
+      });
+    } else {
+      // add to cart
+      sessionStorage.setItem(
+        `${productData.title}`,
+        JSON.stringify(cartProduct)
+        );
 
-  //         // update products data
-  //         productData.quantity = productData.quantity - cartProductQuantity;
-  //         await axios.put(`http://localhost:8000/api/products/${productData._id}`,productData);
-  //       }
-  //     });
-  //   } else {
-  //     // add to cart
-  //     axios.post("http://localhost:8000/api/cart", cartProduct);
+        // update data
+        // dispatch(updateProduct(
+        //   cartProduct
+        // ))
+      }
+  };
 
-  //     // update products data
-  //     productData.quantity = productData.quantity - cartProductQuantity;
-  //     await axios.put(
-  //       `http://localhost:8000/api/products/${productData._id}`,
-  //       productData
-  //     );
-
-  //     // console.log(cartProduct);
-  //   }
-  // };
-  
+  // useEffect(()=>{
+  //   Object.keys(sessionStorage).forEach(key=>{
+  //     setStorage([...storage, sessionStorage.getItem(key)]);
+  //   })
+  // },[])
 
   return (
     <div className=" flex justify-center mt-3">
@@ -83,6 +110,7 @@ export default function ProductDemo({ productData }) {
           <div className="p-5 text-[#2d2d2d]">
             <h1 className="font-bold">{productData?.title}</h1>
             <p className="flex justify-start">{productData?.price}$</p>
+            <p className="flex justify-start">qu:{productData?.quantity}</p>
           </div>
 
           {/* Sizes */}
@@ -168,12 +196,12 @@ export default function ProductDemo({ productData }) {
           <input
             name="quantity"
             type="Number"
-            // onClick={(e) => setCartProductQuantity(e.target.value)}
+            onClick={(e) => setCartProductQuantity(e.target.value)}
           />
 
           {/* button */}
           <button
-            // onClick={addToCart}
+            onClick={addToCart}
             disabled={productData?.quantity == 0 ? true : false}
             type="submit"
             className="mt-6 flex w-full justify-center  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"

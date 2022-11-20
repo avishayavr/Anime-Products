@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../Components/Navbar/Navbar";
+import FullNavbar from "../Components/Navbar/FullNavbar";
 import Product from "../Components/Products/Product";
 
 export default function ProductPage() {
   return (
     <div>
-      <Navbar/>
+      <FullNavbar/>
       <Product />
     </div>
   );

@@ -38,7 +38,7 @@ export default function LoginDemo({email, password, loginFun, btnText, linkDispl
           >
            {btnText}
           </button>
-          <Link to="/singupPage" style={{display: `${linkDisplay}`}}>
+          <Link to="/register" style={{display: `${linkDisplay}`}}>
           <p className='text-center mt-8' >Not a member? Sing up now</p>
             </Link>
             {/* another div for login with google  */}

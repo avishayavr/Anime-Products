@@ -1,8 +1,27 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useEffect } from "react";
+import { useState } from "react";
 
-export default function Cart({ open, setOpen, products, deleteProduct }) {
+export default function Cart({ open, setOpen, deleteProduct }) {
+  const [products, setProducts] = useState([])
+// function to get the data from the session storage
+  const getDataFromStorage = () =>{
+    let storage = []
+    Object.keys(sessionStorage).forEach(key=>{
+      storage.push(JSON.parse(sessionStorage.getItem(key)))
+    })
+    setProducts(storage)
+
+    // console.log(products);
+  }
+   
+
+  useEffect(()=>{
+    getDataFromStorage()
+  },[])
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
