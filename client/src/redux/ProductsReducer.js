@@ -6,20 +6,20 @@ export const productSlice = createSlice({
   name: "products",
   initialState: { value: [] },
   reducers: {
-    // reducer to add the data 
     addUser: (state, action) => {
       state.value.push(action.payload);
     },
-     
-    // reducer to update data
+
     updateProduct: (state, action) => {
-    const matchedObj = state.value.map((product) => {
-        if(product.id === action.payload.id) return action.payload;
-      });
-    console.log(matchedObj);
+      const id = action.payload.id;
+      const index = state.value.findIndex((product) => product.id == id);
+      if (index >= 0) {
+        state.value[index] = action.payload;
+      }
+      console.log(action.payload);
     },
   },
 });
 
-export const { addUser } = productSlice.actions;
+export const { addUser, updateProduct } = productSlice.actions;
 export default productSlice.reducer;

@@ -1,10 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { auth } from "../FirebaseSingup/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/ProductsReducer";
+import {updateProduct} from "../../redux/ProductsReducer"
 // import { useEffect } from "react";
 
 export default function ProductDemo({ productData }) {
@@ -47,7 +47,9 @@ export default function ProductDemo({ productData }) {
             JSON.stringify(cartProduct)
           );
 
-          // // update products data
+          // update products data
+          productData.quantity = 0;
+          dispatch(updateProduct(productData))
           
 
           // console.log("matched");
@@ -58,17 +60,9 @@ export default function ProductDemo({ productData }) {
             JSON.stringify(cartProduct)
           );
 
-          // // update products data
-          // const productFromDataBase = await axios.get(
-          //   `http://localhost:8000/api/products/${productData.id}`
-          // );
-          // productFromDataBase.quantity = Number(
-          //   +productFromDataBase.quantity - +cartProduct.quantity
-          // );
-          // await axios.put(
-          //   `http://localhost:8000/api/products/${productData.id}`,
-          //   productFromDataBase
-          // );
+          // update products data
+          // productData.quantity = Number(+productData.quantity - +cartProduct.quantity)
+          dispatch(updateProduct(productData))
           // console.log("not matched");
         }
       });
@@ -79,10 +73,10 @@ export default function ProductDemo({ productData }) {
         JSON.stringify(cartProduct)
         );
 
-        // update data
-        // dispatch(updateProduct(
-        //   cartProduct
-        // ))
+         // update products data
+        //  productData.quantity = Number(+productData.quantity - +cartProduct.quantity)
+         dispatch(updateProduct(productData))
+        
       }
   };
 
