@@ -1,11 +1,20 @@
 import axios from "axios";
 import React from "react";
 
-export default function CheckoutBtn({cartItems}) {
+const CheckoutBtn = ({cartItems}) => {
+
+    // const url = "http://localhost:8000"
     
     const handleCheckout = ()=>{
-       console.log(cartItems);
-    }
+        axios.post(`http://localhost:8000/api/stripe/create-checkout-session`, {cartItems})
+        .then((response) => {
+            if (response.data.url) {
+              window.location.href = response.data.url;
+            }
+          })
+          .catch((err) => console.log(err.message));
+    //    console.log(cartItems);
+    };
 
   return (
     <div>
@@ -16,4 +25,9 @@ export default function CheckoutBtn({cartItems}) {
       </div>
     </div>
   );
-}
+};
+
+export default CheckoutBtn;
+
+
+

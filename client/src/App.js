@@ -5,7 +5,7 @@ import ProductsPage from "./Pages/ProductsPage";
 import ProductPage from "./Pages/ProductPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
-import CheckoutPage from "./Pages/CheckoutPage";
+import CheckoutSuccess from "./Components/CartAndCheckout/CheckoutSuccess";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addUser } from "./redux/ProductsReducer";
@@ -36,7 +36,7 @@ function App() {
         <Route path="product/:id" element={<ProductPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="/checkout-success" element={<CheckoutSuccess/>} />
       </Routes>
     </div>
   );
