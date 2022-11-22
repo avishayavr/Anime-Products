@@ -3,8 +3,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CheckoutBtn from "./CheckoutBtn";
 
 export default function Cart({ open, setOpen, deleteProduct }) {
+
+  // const navigate = useNavigate()
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const [products, setProducts] = useState([])
 // function to get the data from the session storage
   const getDataFromStorage = () =>{
@@ -14,7 +21,12 @@ export default function Cart({ open, setOpen, deleteProduct }) {
     })
     setProducts(storage)
 
-    // console.log(products);
+    // set the total price 
+    let countTotalPrice = 0;
+    for(let i = 0;i < storage.length; i++ ){
+      countTotalPrice += storage[i].price
+    }
+    setTotalPrice(countTotalPrice);
   }
    
 
@@ -80,7 +92,6 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
                                       src={product.image}
-                                      // alt={product.imageAlt}
                                       className="h-full w-full object-cover object-center"
                                     />
                                   </div>
@@ -89,24 +100,19 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          {/* <a href={product.href}> */}
                                           {product.title}
-                                          {/* </a> */}
                                         </h3>
-                                        <p className="ml-4">{product.price}</p>
+                                        <p className="ml-4">${product.price}</p>
                                       </div>
-                                      {/* <p className="mt-1 text-sm text-gray-500">
-                                      {product.color}
-                                    </p> */}
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
                                       <p className="text-gray-500">
-                                        Qty {product.quantity}
+                                        {/* Qty {product.quantity} */}
                                       </p>
 
                                       <div className="flex">
                                         <button
-                                        onClick={()=>deleteProduct(product._id)}
+                                        onClick={()=>sessionStorage.removeItem(`${product.title}`)}
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
@@ -126,20 +132,13 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>${totalPrice}</p>
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">
+                      {/* <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
-                      </p>
-                      <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Checkout
-                        </a>
-                      </div>
-                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                      </p> */}
+                       <CheckoutBtn cartItems={products}/>
+                      {/* <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or
                           <button
@@ -151,7 +150,7 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                             <span aria-hidden="true"> &rarr;</span>
                           </button>
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Dialog.Panel>

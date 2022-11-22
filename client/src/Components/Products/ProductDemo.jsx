@@ -1,18 +1,26 @@
 // import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { auth } from "../FirebaseSingup/firebaseConfig";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from "react-redux";
-import {updateProduct} from "../../redux/ProductsReducer"
+import React, {useState} from "react";
+// import { auth } from "../FirebaseSingup/firebaseConfig";
+// import { useAuthState } from "react-firebase-hooks/auth";
+// import { useDispatch } from "react-redux";
+// import { Fragment, useState } from 'react'
+// import { RadioGroup } from '@headlessui/react'
+// import { XMarkIcon } from '@heroicons/react/24/outline'
+// import { StarIcon } from '@heroicons/react/20/solid'
 // import { useEffect } from "react";
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
 export default function ProductDemo({ productData }) {
-  const dispatch = useDispatch();
-  const [user] = useAuthState(auth);
+  // const [selectedSize, setSelectedSize] = useState(sizes[2])
+
+  // const dispatch = useDispatch();
+  // const [user] = useAuthState(auth);
 
   // state for the cart new product quantity
-  const [cartProductQuantity, setCartProductQuantity] = useState(0);
+  // const [cartProductQuantity, setCartProductQuantity] = useState(0);
 
   //   function to add product to cart
   const addToCart = () => {
@@ -20,12 +28,12 @@ export default function ProductDemo({ productData }) {
     const cartProduct = {
       _id: productData._id,
       title: productData.title,
-      price: Number(productData.price * cartProductQuantity),
-      quantity: +cartProductQuantity,
+      price: Number(productData.price),
+      // quantity: +cartProductQuantity,
       image: productData.image,
     };
 
-    // function to get an array of all the data
+    // function inside the addToPCart function to get an array of all the data
     let storage = [];
     Object.keys(sessionStorage).forEach((key) => {
       storage.push(JSON.parse(sessionStorage.getItem(key)));
@@ -36,21 +44,7 @@ export default function ProductDemo({ productData }) {
       // iteration on the cart the check if the product already in the cart
       storage?.map(async (product) => {
         if (product.title.includes(productData.title) === true) {
-          // update the cart
-          cartProduct.quantity = Number(
-            +product.quantity + +cartProductQuantity
-          );
-          cartProduct.price = Number(productData.price * cartProduct.quantity);
-          sessionStorage.removeItem(`${productData.title}`);
-          sessionStorage.setItem(
-            `${productData.title}`,
-            JSON.stringify(cartProduct)
-          );
-
-          // update products data
-          productData.quantity = 0;
-          dispatch(updateProduct(productData))
-          
+          prompt("This product is already in the cart")
 
           // console.log("matched");
         } else if (product.title.includes(productData.title) === false) {
@@ -59,11 +53,6 @@ export default function ProductDemo({ productData }) {
             `${productData.title}`,
             JSON.stringify(cartProduct)
           );
-
-          // update products data
-          // productData.quantity = Number(+productData.quantity - +cartProduct.quantity)
-          dispatch(updateProduct(productData))
-          // console.log("not matched");
         }
       });
     } else {
@@ -71,20 +60,9 @@ export default function ProductDemo({ productData }) {
       sessionStorage.setItem(
         `${productData.title}`,
         JSON.stringify(cartProduct)
-        );
-
-         // update products data
-        //  productData.quantity = Number(+productData.quantity - +cartProduct.quantity)
-         dispatch(updateProduct(productData))
-        
-      }
+      );
+    }
   };
-
-  // useEffect(()=>{
-  //   Object.keys(sessionStorage).forEach(key=>{
-  //     setStorage([...storage, sessionStorage.getItem(key)]);
-  //   })
-  // },[])
 
   return (
     <div className=" flex justify-center mt-3">
@@ -104,7 +82,7 @@ export default function ProductDemo({ productData }) {
           <div className="p-5 text-[#2d2d2d]">
             <h1 className="font-bold">{productData?.title}</h1>
             <p className="flex justify-start">{productData?.price}$</p>
-            <p className="flex justify-start">qu:{productData?.quantity}</p>
+            {/* <p className="flex justify-start">qu:{productData?.quantity}</p> */}
           </div>
 
           {/* Sizes */}
@@ -187,11 +165,11 @@ export default function ProductDemo({ productData }) {
               </div>
             </RadioGroup>
           </div> */}
-          <input
+          {/* <input
             name="quantity"
             type="Number"
             onClick={(e) => setCartProductQuantity(e.target.value)}
-          />
+          /> */}
 
           {/* button */}
           <button

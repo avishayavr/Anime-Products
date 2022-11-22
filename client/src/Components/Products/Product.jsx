@@ -27,7 +27,8 @@ export default function Product() {
 
   return (
     <div>
-      <ProductDemo productData={product}  />
+      <ProductDemo productData={product}
+       />
     </div>
   );
 }

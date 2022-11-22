@@ -10,14 +10,14 @@ export const productSlice = createSlice({
       state.value.push(action.payload);
     },
 
-    updateProduct: (state, action) => {
-      const id = action.payload.id;
-      const index = state.value.findIndex((product) => product.id == id);
-      if (index >= 0) {
-        state.value[index] = action.payload;
-      }
-      console.log(action.payload);
-    },
+    // updateProduct: (state, action) => {
+    //   const id = action.payload.id;
+    //   const index = state.value.findIndex((product) => product.id == id);
+    //   if (index >= 0) {
+    //     state.value[index] = action.payload;
+    //   }
+    //   console.log(action.payload);
+    // },
   },
 });
 
