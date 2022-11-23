@@ -3,18 +3,21 @@ import React from "react";
 
 const CheckoutBtn = ({cartItems}) => {
 
-    // const url = "http://localhost:8000"
+    // const url = "http://localhost:8000/api/stripe"
     
-    const handleCheckout = ()=>{
-        axios.post(`http://localhost:8000/api/stripe/create-checkout-session`, {cartItems})
-        .then((response) => {
+    const handleCheckout = () => {
+        axios
+          .post(`http://localhost:8000/api/stripe/create-checkout-session`, {
+            cartItems,
+            // userId: user._id,
+          })
+          .then((response) => {
             if (response.data.url) {
-              window.location.href = response.data.url;
+              console.log(response.data.url);
             }
           })
           .catch((err) => console.log(err.message));
-    //    console.log(cartItems);
-    };
+      };
 
   return (
     <div>
