@@ -7,24 +7,34 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import CheckoutSuccess from "./Components/CartAndCheckout/CheckoutSuccess";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { addUser } from "./redux/ProductsReducer";
+// import axios from "axios";
+import { getCart } from "./redux/cartReducer";
 import { useEffect } from "react";
 
 
 function App() {
-  const products = useSelector((state) => state.products.value);
+  const cart = useSelector((state) => state.cart.value);
   // console.log(products);
   const dispatch = useDispatch();
 
 
   const getData = async () => {
-    const { data } = await axios.get("http://localhost:8000/api/products");
-    if (products.length == 0) data.map((product) => dispatch(addUser(product)));
+    // const { data } = await axios.get("http://localhost:8000/api/products");
+
+    // let storage = []
+    Object.keys(sessionStorage).forEach(key=>{
+      cart.push(JSON.parse(sessionStorage.getItem(key)))
+    })
+
+    
+    // if (products.length == 0) data.map((product) => dispatch(getCart(product)));
+
+    // console.log(cart);
   };
 
   useEffect(() => {
     getData();
+    // console.log(cart);
   }, []);
 
   return (

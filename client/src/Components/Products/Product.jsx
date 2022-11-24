@@ -2,11 +2,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import ProductDemo from "./ProductDemo";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useState, useEffect } from "react";
 // import {auth} from "../FirebaseSingup/firebaseConfig"
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useEffect } from "react";
 
 export default function Product() {
+  const [product, setProduct] = useState({}) 
   const { id } = useParams();
   // console.log(id);
 
@@ -14,16 +17,18 @@ export default function Product() {
   // console.log(user.email);
 
 
-  const product = useSelector((state) =>
-    state.products.value.find((product) => product._id == id)
-  );
-  // console.log(product);
+  // get the product data 
+  const getProduct = async () =>{
+    const {data} = await axios.get(`http://localhost:8000/api/products/${id}`)
+    setProduct(data)
+    // console.log(data);
+  }
 
   
 
-  // useEffect(()=>{
-  //   console.log(user);
-  // },[])
+  useEffect(()=>{
+    getProduct()
+  },[])
 
   return (
     <div>

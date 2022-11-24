@@ -1,12 +1,24 @@
+import axios from 'axios';
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 
 
 
-export default function ProductTemplate({productsData}) {
+export default function ProductTemplate() {
 
+  const [productsData, setProductsData] = useState([])
 
+  const getData = async () => {
+    const { data } = await axios.get("http://localhost:8000/api/products");
+    setProductsData(data)
+    // console.log(productsData);
+    };
+
+    useEffect(()=>{
+getData()
+    }, [])
 
   return (
     <div className="bg-[#fff]">
