@@ -13,27 +13,25 @@ import { useEffect } from "react";
 
 
 function App() {
-  const cart = useSelector((state) => state.cart.value);
+  // const cart = useSelector((state) => state.cart.value);
   // console.log(products);
   const dispatch = useDispatch();
 
 
-  const getData = async () => {
+  const getData = () => {
     // const { data } = await axios.get("http://localhost:8000/api/products");
 
-    // let storage = []
+    let storage = []
     Object.keys(sessionStorage).forEach(key=>{
-      cart.push(JSON.parse(sessionStorage.getItem(key)))
+      storage.push(JSON.parse(sessionStorage.getItem(key)))
     })
-
-    
-    // if (products.length == 0) data.map((product) => dispatch(getCart(product)));
-
+     
+    if (storage.length == 0) storage.map(product => dispatch(getCart(product)))
     // console.log(cart);
   };
 
   useEffect(() => {
-    getData();
+    // getData();
     // console.log(cart);
   }, []);
 

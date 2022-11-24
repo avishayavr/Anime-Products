@@ -8,9 +8,19 @@ export const  cartSlice = createSlice({
     reducers:{
         getCart: (state, action) => {
             state.value.push(action.payload);
-          }
+          },
+        updateCart:(state, action) =>{
+            const id = action.payload._id;
+            const newCart = [...state.value]
+            const productIndex = newCart.findIndex(product=> product._id === id);
+            if (productIndex >= 0) {
+                newCart[productIndex] = action.payload;
+              }
+            console.log(action.payload);
+            return newCart;
+        }  
     }
 })
 
-export const { getCart } = cartSlice.actions;
+export const { getCart, updateCart } = cartSlice.actions;
 export default cartSlice.reducer;

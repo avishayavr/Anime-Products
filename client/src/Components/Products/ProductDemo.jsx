@@ -1,5 +1,7 @@
 // import axios from "axios";
 import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart, updateCart } from "../../redux/cartReducer";
 // import { auth } from "../FirebaseSingup/firebaseConfig";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useDispatch } from "react-redux";
@@ -14,54 +16,22 @@ function classNames(...classes) {
 }
 
 export default function ProductDemo({ productData }) {
-  // const [selectedSize, setSelectedSize] = useState(sizes[2])
+  const cart = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch();
-  // const [user] = useAuthState(auth);
-
-  // state for the cart new product quantity
-  // const [cartProductQuantity, setCartProductQuantity] = useState(0);
-
-  //   function to add product to cart
+  // function to add product to the car
   const addToCart = () => {
+    let isProductExist = Boolean(cart.find((product)=>product.title === productData.title)) 
     //  new product to add to the cart
     const cartProduct = {
       _id: productData._id,
       title: productData.title,
       price: Number(productData.price),
-      // quantity: +cartProductQuantity,
+      quantity: 0,
       image: productData.image,
     };
-
-    // function inside the addToPCart function to get an array of all the data
-    let storage = [];
-    Object.keys(sessionStorage).forEach((key) => {
-      storage.push(JSON.parse(sessionStorage.getItem(key)));
-    });
-    // console.log(storage);
-
-    if (storage?.length > 0) {
-      // iteration on the cart the check if the product already in the cart
-      storage?.map(async (product) => {
-        if (product.title.includes(productData.title) === true) {
-          prompt("This product is already in the cart")
-
-          // console.log("matched");
-        } else if (product.title.includes(productData.title) === false) {
-          // add to cart
-          sessionStorage.setItem(
-            `${productData.title}`,
-            JSON.stringify(cartProduct)
-          );
-        }
-      });
-    } else {
-      // add to cart
-      sessionStorage.setItem(
-        `${productData.title}`,
-        JSON.stringify(cartProduct)
-      );
-    }
+    if(isProductExist) return "product exist"
+    dispatch(getCart(cartProduct))
   };
 
   return (

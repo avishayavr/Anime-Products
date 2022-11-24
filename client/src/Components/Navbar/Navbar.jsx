@@ -3,22 +3,23 @@ import {useNavigate } from "react-router-dom";
 import { BsFillBagFill } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 export default function Navbar({openCart, logOut, user}) {
 
   const navigate = useNavigate();
 
-  const [cart, setCart] = useState([])
+  const cart = useSelector(state => state.cart.value)
 
-  useEffect(()=>{
-    let storage = []
-    Object.keys(sessionStorage).forEach(key=>{
-      storage.push(JSON.parse(sessionStorage.getItem(key)))
-    })
-    setCart(storage)
-    // console.log(cart);
-  },[])
+  // useEffect(()=>{
+  //   let storage = []
+  //   Object.keys(sessionStorage).forEach(key=>{
+  //     storage.push(JSON.parse(sessionStorage.getItem(key)))
+  //   })
+  //   setCart(storage)
+  //   // console.log(cart);
+  // },[])
 
   return (
     <div className="bg-[#2d2d2d] flex justify-between items-center">

@@ -3,36 +3,45 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import CheckoutBtn from "./CheckoutBtn";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../../redux/cartReducer";
+
 
 export default function Cart({ open, setOpen, deleteProduct }) {
-
-  // const navigate = useNavigate()
+  const cart = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch()
 
   const [totalPrice, setTotalPrice] = useState(0);
+  // const [productPrice, setProductPrice] = useState(0);
 
-  const [products, setProducts] = useState([])
-// function to get the data from the session storage
-  const getDataFromStorage = () =>{
-    let storage = []
-    Object.keys(sessionStorage).forEach(key=>{
-      storage.push(JSON.parse(sessionStorage.getItem(key)))
-    })
-    setProducts(storage)
-
-    // set the total price 
-    let countTotalPrice = 0;
-    for(let i = 0;i < storage.length; i++ ){
-      countTotalPrice += storage[i].price
-    }
-    setTotalPrice(countTotalPrice);
+  // function to get the total price
+  const totalPriceFun = () => {
+    let counter = 0;
+    cart.map(product =>{
+     counter = counter + product.price
+    }) 
+    setTotalPrice(counter);
   }
-   
+
+  // function to update quantity and price
+  const updateQuantity = (value, product) =>{
+  let updatedProduct = {
+  _id : product._id,
+  title:product.title,
+  quantity : value,
+  price : value * product.price,
+  image: product.image
+  }
+  dispatch(updateCart(updatedProduct))
+  // console.log(cart);
+  }
+
 
   useEffect(()=>{
-    getDataFromStorage()
-  },[])
+    totalPriceFun();
+  },[cart])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -87,7 +96,7 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                             className="-my-6 divide-y divide-gray-200"
                           >
                             {
-                              products?.map((product, i) => (
+                              cart?.map((product, i) => (
                                 <li key={i} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
@@ -102,13 +111,12 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                                         <h3>
                                           {product.title}
                                         </h3>
-                                        <p className="ml-4">${product.price}</p>
+                                        <p className="ml-4">{product.price}</p>
                                       </div>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">
-                                        {/* Qty {product.quantity} */}
-                                      </p>
+                                      
+                                      <input type="number" className="border border-[#2d2d2d]" onChange={(e)=> updateQuantity(e.target.value, product)}/>
 
                                       <div className="flex">
                                         <button
@@ -137,7 +145,7 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                       {/* <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
                       </p> */}
-                       <CheckoutBtn cartItems={products}/>
+                       <CheckoutBtn cartItems={cart}/>
                       {/* <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or
