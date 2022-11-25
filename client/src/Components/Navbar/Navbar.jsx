@@ -52,7 +52,7 @@ export default function Navbar({openCart, logOut, user}) {
         onClick={openCart}
         className="text-[#fff] relative flex justify-center p-3 hover:cursor-pointer">
         <BsFillBagFill className="text-3xl"/>
-        <span className="absolute top-4  text-[#2d2d2d]">{ cart.length }</span>
+        <span className="absolute top-4  text-[#2d2d2d]">{ cart?.length }</span>
       </div>
       {/* <Cart open={open} setOpen={setOpen} /> */}
     </div>

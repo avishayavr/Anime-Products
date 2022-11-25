@@ -11,13 +11,13 @@ export const  cartSlice = createSlice({
           },
         updateCart:(state, action) =>{
             const id = action.payload._id;
-            const newCart = [...state.value]
+            let newCart = [...state.value]
             const productIndex = newCart.findIndex(product=> product._id === id);
             if (productIndex >= 0) {
-                newCart[productIndex] = action.payload;
+                state.value[productIndex] = action.payload;
               }
-            console.log(action.payload);
-            return newCart;
+            console.log(state.value[productIndex]);
+            // return newCart;
         }  
     }
 })

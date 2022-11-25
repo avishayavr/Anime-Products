@@ -26,8 +26,9 @@ export default function ProductDemo({ productData }) {
     const cartProduct = {
       _id: productData._id,
       title: productData.title,
-      price: Number(productData.price),
+      productPrice: Number(productData.price),
       quantity: 0,
+      price: 0,
       image: productData.image,
     };
     if(isProductExist) return "product exist"

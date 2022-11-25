@@ -14,34 +14,42 @@ export default function Cart({ open, setOpen, deleteProduct }) {
   const dispatch = useDispatch()
 
   const [totalPrice, setTotalPrice] = useState(0);
-  // const [productPrice, setProductPrice] = useState(0);
+  const [productQuantity, setProductQuantity] = useState(0);
 
   // function to get the total price
   const totalPriceFun = () => {
     let counter = 0;
-    cart.map(product =>{
+    cart?.map(product =>{
      counter = counter + product.price
     }) 
     setTotalPrice(counter);
   }
 
   // function to update quantity and price
-  const updateQuantity = (value, product) =>{
+  const updateQuantity = ( value, product, e) =>{
+    e.preventDefault();
+    setProductQuantity(Number(productQuantity) + Number(value))
+
   let updatedProduct = {
   _id : product._id,
   title:product.title,
-  quantity : value,
-  price : value * product.price,
+  productPrice : product.productPrice,
+  quantity : productQuantity,
+  price : Number(productQuantity) * Number(product.productPrice),
   image: product.image
   }
   dispatch(updateCart(updatedProduct))
-  // console.log(cart);
+  console.log(productQuantity);
   }
 
 
   useEffect(()=>{
     totalPriceFun();
   },[cart])
+
+  // useEffect(()=>{
+  //   updateQuantity();
+  // },[productQuantity])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -115,8 +123,12 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                                       </div>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      
-                                      <input type="number" className="border border-[#2d2d2d]" onChange={(e)=> updateQuantity(e.target.value, product)}/>
+                                      <div className="flex justify-between">
+                                      {/* <input type="number" onChange={(e)=> updateQuantity(e.target.value, product)}/> */}
+                                      <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(1, product,e)}>+</button>
+                                      {productQuantity}
+                                      <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(-1, product,e)}>-</button>
+                                      </div>
 
                                       <div className="flex">
                                         <button
