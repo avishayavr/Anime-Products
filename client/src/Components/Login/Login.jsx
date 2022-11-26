@@ -27,7 +27,7 @@ export default function Login() {
         loginPassword
       );
       navigate("/products");
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       console.log({ msg: error });
     }
@@ -38,7 +38,7 @@ export default function Login() {
   const singInWithGoogle = () =>{
     const provider = new GoogleAuthProvider
     signInWithPopup(auth, provider)
-    console.log(provider);
+    // console.log(provider);
   }
 
   // use effect to authorization

@@ -6,50 +6,32 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import CheckoutBtn from "./CheckoutBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "../../redux/cartReducer";
+import { deleteProduct } from "../../redux/cartReducer"
 
-
-export default function Cart({ open, setOpen, deleteProduct }) {
+export default function Cart({ open, setOpen }) {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch()
 
   const [totalPrice, setTotalPrice] = useState(0);
-  const [productQuantity, setProductQuantity] = useState(0);
 
   // function to get the total price
   const totalPriceFun = () => {
     let counter = 0;
     cart?.map(product =>{
-     counter = counter + product.price
+     counter = counter + product.productPrice
     }) 
     setTotalPrice(counter);
   }
 
-  // function to update quantity and price
-  const updateQuantity = ( value, product, e) =>{
-    e.preventDefault();
-    setProductQuantity(Number(productQuantity) + Number(value))
-
-  let updatedProduct = {
-  _id : product._id,
-  title:product.title,
-  productPrice : product.productPrice,
-  quantity : productQuantity,
-  price : Number(productQuantity) * Number(product.productPrice),
-  image: product.image
+  // fun to delete product from cart 
+  const deleteProductFun = (obj) =>{
+    dispatch(deleteProduct(obj))
   }
-  dispatch(updateCart(updatedProduct))
-  console.log(productQuantity);
-  }
-
 
   useEffect(()=>{
     totalPriceFun();
   },[cart])
 
-  // useEffect(()=>{
-  //   updateQuantity();
-  // },[productQuantity])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -119,20 +101,20 @@ export default function Cart({ open, setOpen, deleteProduct }) {
                                         <h3>
                                           {product.title}
                                         </h3>
-                                        <p className="ml-4">{product.price}</p>
+                                        <p className="ml-4">{product.productPrice}</p>
                                       </div>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
                                       <div className="flex justify-between">
                                       {/* <input type="number" onChange={(e)=> updateQuantity(e.target.value, product)}/> */}
-                                      <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(1, product,e)}>+</button>
-                                      {productQuantity}
-                                      <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(-1, product,e)}>-</button>
+                                      {/* <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(1, product,e)}>+</button> */}
+                                      {/* {productQuantity} */}
+                                      {/* <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(-1, product,e)}>-</button> */}
                                       </div>
 
                                       <div className="flex">
                                         <button
-                                        onClick={()=>sessionStorage.removeItem(`${product.title}`)}
+                                        onClick={()=>deleteProductFun(product)}
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
