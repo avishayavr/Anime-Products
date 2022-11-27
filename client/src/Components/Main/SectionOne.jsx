@@ -12,7 +12,7 @@ import axios from "axios";
 
 export default function SectionOne() {
   const [products, setProducts] = useState([]);
-  const [index, setIndex] = useState(Math.floor(Math.random() * 9));
+  const [index, setIndex] = useState(Math.floor(Math.random() * 8));
 
   const getData = async ()=>{
     const { data } = await axios.get("http://localhost:8000/api/products");
@@ -24,10 +24,10 @@ export default function SectionOne() {
     getData();
   }, []);
   return (
-    <div className="m-5">
+    <div className="m-5 bg-[#fff] rounded-xl">
       <h1 className="text-2xl m-3">Some Products</h1>
       <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-      <MDBCol>
+      <MDBCol >
           <MDBCard>
             <MDBCardImage
               src={products[index]?.image}
@@ -44,7 +44,7 @@ export default function SectionOne() {
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
-        <MDBCol>
+        <MDBCol >
           <MDBCard>
             <MDBCardImage
               src={products[index+1]?.image}
@@ -61,7 +61,7 @@ export default function SectionOne() {
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
-        <MDBCol>
+        <MDBCol >
           <MDBCard>
             <MDBCardImage
               src={products[index+2]?.image}
@@ -78,7 +78,7 @@ export default function SectionOne() {
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
-        <MDBCol>
+        <MDBCol >
           <MDBCard>
             <MDBCardImage
               src={products[index+3]?.image}
