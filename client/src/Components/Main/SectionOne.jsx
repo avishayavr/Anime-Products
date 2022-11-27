@@ -17,18 +17,18 @@ export default function SectionOne() {
   const getData = async ()=>{
     const { data } = await axios.get("http://localhost:8000/api/products");
     setProducts(data);
-    console.log(data);
+    // console.log(data);
   }
 
   useEffect(() => {
     getData();
   }, []);
   return (
-    <div className="m-5 bg-[#fff] rounded-xl">
-      <h1 className="text-2xl m-3">Some Products</h1>
+    <div className="my-5 mx-3 sm:bg-[#fff] sm:opacity-60 rounded-xl">
+      <h1 className="text-2xl text-[#fff] sm:text-[#2d2d2d] my-3">Some Products</h1>
       <MDBRow className="row-cols-1 row-cols-md-3 g-4">
       <MDBCol >
-          <MDBCard>
+          <MDBCard className="m-2 sm:m-0">
             <MDBCardImage
               src={products[index]?.image}
               alt="..."
@@ -45,7 +45,7 @@ export default function SectionOne() {
           </MDBCard>
         </MDBCol>
         <MDBCol >
-          <MDBCard>
+          <MDBCard className="m-2 sm:m-0">
             <MDBCardImage
               src={products[index+1]?.image}
               alt="..."
@@ -62,7 +62,7 @@ export default function SectionOne() {
           </MDBCard>
         </MDBCol>
         <MDBCol >
-          <MDBCard>
+          <MDBCard className="m-2 sm:m-0">
             <MDBCardImage
               src={products[index+2]?.image}
               alt="..."
@@ -79,7 +79,7 @@ export default function SectionOne() {
           </MDBCard>
         </MDBCol>
         <MDBCol >
-          <MDBCard>
+          <MDBCard className="m-2 sm:m-0">
             <MDBCardImage
               src={products[index+3]?.image}
               alt="..."
