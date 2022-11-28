@@ -8,12 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const productsRouter = require("./routers/productsRouter");
-const cartRouter = require("./routers/cartRouter");
 const stripeRouter = require("./routers/stripeRouter")
 
 
 app.use("/api/products", productsRouter);
-app.use("/api/cart", cartRouter);
 app.use("/api/stripe", stripeRouter);
 
 

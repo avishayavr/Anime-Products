@@ -5,26 +5,24 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function Product() {
-  const [product, setProduct] = useState({}) 
+  const [product, setProduct] = useState({});
   const { id } = useParams();
 
+  // get the product data
+  const getProduct = async () => {
+    const { data } = await axios.get(
+      `http://localhost:8000/api/products/${id}`
+    );
+    setProduct(data);
+  };
 
-  // get the product data 
-  const getProduct = async () =>{
-    const {data} = await axios.get(`http://localhost:8000/api/products/${id}`)
-    setProduct(data)
-  }
-
-  
-
-  useEffect(()=>{
-    getProduct()
-  },[])
+  useEffect(() => {
+    getProduct();
+  }, []);
 
   return (
     <div>
-      <ProductDemo productData={product}/>
-      {/* <ProductRelative currentProduct={product}/> */}
+      <ProductDemo productData={product} />
     </div>
   );
 }

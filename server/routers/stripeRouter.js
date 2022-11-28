@@ -1,30 +1,35 @@
 const express = require("express");
-const Stripe = require("stripe");
-require("dotenv").config();
+const Stripe = require('stripe');
+const stripe = Stripe('sk_test_51M6hOFBzkRWCspGOr4OFfy4yCb2nFOlc6K5Ik17yI2LjX8rUTfdyH90mVG52ZfNDK3SstDUKNGuSYvk7cFghB3eP00JkE9v2Sm');
 const router = express.Router();
 
-const stripe = Stripe(process.env.STRIPE_KEY);
-
+// post request to create checkout session
 router.post("/create-checkout-session", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
+
+  // iteration on the data from the cart
+  const line_items = req.body.cartItems.map(item=>{
+    return(
       {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "T-shirt",
+            name: item.title,
+            images: [item.image]
           },
-          unit_amount: 2000,
+          unit_amount: item.productPrice * 100,
         },
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: `${process.env.CLIENT_URL}/checkout-success`,
-    cancel_url: `${process.env.CLIENT_URL}/products`,
-  });
+        quantity: item.productQuantity,
+      }
+    )
+  })
 
-  // console.log(process.env.STRIPE_KEY);
+  // create the session i send
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: "payment",
+    success_url: "http://localhost:3000/checkoutSuccess",
+    cancel_url: "http://localhost:3000",
+  });
 
   res.send({ url: session.url });
 });

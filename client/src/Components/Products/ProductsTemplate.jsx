@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function ProductTemplate() {
   const [productsData, setProductsData] = useState([]);
 
+  // function tpo get data using axios
   const getData = async () => {
     const { data } = await axios.get("http://localhost:8000/api/products");
     setProductsData(data);

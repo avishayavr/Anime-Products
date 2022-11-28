@@ -5,7 +5,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import CheckoutBtn from "./CheckoutBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { increaseQuantity, decreaseQuantity, deleteProduct } from "../../redux/cartReducer";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  deleteProduct,
+} from "../../redux/cartReducer";
 
 export default function Cart({ open, setOpen }) {
   const cart = useSelector((state) => state.cart.value);
@@ -17,12 +21,10 @@ export default function Cart({ open, setOpen }) {
   const totalPriceFun = () => {
     let counter = 0;
     cart?.map((product) => {
-      counter += (product.productQuantity * product.productPrice
-        )
+      counter += product.productQuantity * product.productPrice;
     });
     setTotalPrice(counter);
   };
-
 
   // fun to delete product from cart
   const deleteProductFun = (obj) => {
@@ -85,6 +87,7 @@ export default function Cart({ open, setOpen }) {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
+                            {/* iteration on the cart to display the data */}
                             {cart?.map((product, i) => (
                               <li key={i} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -99,33 +102,36 @@ export default function Cart({ open, setOpen }) {
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>{product.title}</h3>
                                       <p className="ml-4">
-                                        ${+product.productPrice *
+                                        $
+                                        {+product.productPrice *
                                           +product.productQuantity}
                                       </p>
                                     </div>
                                   </div>
+                                  {/* div to change the quantity of the product */}
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <div className="flex justify-between">
-                                      {/* <input type="number" onChange={(e)=> updateQuantity(e.target.value, product)}/> */}
                                       <button
-                                        className="bg-[#2d2d2d] text-white p-1"
-                                        onClick={() => 
+                                        className="bg-[#2d2d2d] w-8 text-[#fff] text-2xl font-bold rounded-md"
+                                        onClick={() =>
                                           dispatch(increaseQuantity(product))
                                         }
                                       >
                                         +
                                       </button>
-                                      <h1 >{product.productQuantity}</h1>
+                                      <h1 className="text-xl mx-1">
+                                        {product.productQuantity}
+                                      </h1>
                                       <button
-                                        className="bg-[#2d2d2d] text-white p-1"
-                                        onClick={(e) => 
+                                        className="bg-[#2d2d2d] w-8 text-[#fff] text-2xl font-bold rounded-md"
+                                        onClick={(e) =>
                                           dispatch(decreaseQuantity(product))
                                         }
                                       >
                                         -
                                       </button>
                                     </div>
-
+                                    {/* remove btn */}
                                     <div className="flex">
                                       <button
                                         onClick={() =>
@@ -145,12 +151,13 @@ export default function Cart({ open, setOpen }) {
                         </div>
                       </div>
                     </div>
-
+                    {/* total price/checkout div  */}
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
                         <p>${totalPrice}</p>
                       </div>
+                      {/* checkout btn */}
                       <CheckoutBtn cartItems={cart} />
                     </div>
                   </div>

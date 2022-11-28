@@ -1,14 +1,13 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Cart from "../CartAndCheckout/Cart";
 import Navbar from "./Navbar";
-import {auth} from "../FirebaseSingup/firebaseConfig"
+import { auth } from "../FirebaseSingup/firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
-
 export default function FullNavbar() {
-// current user
+  // current user
   const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -22,14 +21,13 @@ export default function FullNavbar() {
 
   // function to logout
   const logOutFun = () => {
-    // console.log(auth);
     signOut(auth);
     navigate("/");
   };
 
   return (
     <div>
-      <Navbar openCart={openCartFun} logOut={logOutFun} user={user}/>
+      <Navbar openCart={openCartFun} logOut={logOutFun} user={user} />
       <Cart open={open} setOpen={setOpen} />
     </div>
   );

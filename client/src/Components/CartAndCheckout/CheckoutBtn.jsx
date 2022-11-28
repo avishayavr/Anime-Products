@@ -1,28 +1,26 @@
 import axios from "axios";
 import React from "react";
 
-const CheckoutBtn = ({cartItems}) => {
-
-    // const url = "http://localhost:8000/api/stripe"
-    
-    const handleCheckout = () => {
-        axios
-          .post(`http://localhost:8000/api/stripe/create-checkout-session`, {
-            cartItems,
-            // userId: user._id,
-          })
-          .then((response) => {
-            if (response.data.url) {
-              console.log(response.data.url);
-            }
-          })
-          .catch((err) => console.log(err.message));
-      };
+const CheckoutBtn = ({ cartItems }) => {
+  const handleCheckout = () => {
+    // adding data to and url to checkout page
+    axios
+      .post("http://localhost:8000/api/stripe/create-checkout-session", {
+        cartItems,
+        userId: 1,
+      })
+      .then((res) => {
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   return (
-    <div>
-      <div className="mt-6" onClick={() => handleCheckout()}>
-        <p className="flex items-center justify-center rounded-md border border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d]  px-6 py-3 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d] shadow-sm">
+    <div onClick={() => handleCheckout()}>
+      <div className="mt-6">
+        <p className="flex items-center justify-center rounded-md border border-transparent  px-6 py-3 text-base font-medium shadow-sm bg-[#2d2d2d] text-[#fff] hover:bg-[#fff] hover:text-[#2d2d2d]">
           Checkout
         </p>
       </div>
@@ -31,6 +29,3 @@ const CheckoutBtn = ({cartItems}) => {
 };
 
 export default CheckoutBtn;
-
-
-

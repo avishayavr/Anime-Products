@@ -1,18 +1,24 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-// import { AiFillFacebook } from "react-icons/ai";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-
-export default function LoginDemo({email, password, loginFun, btnText, linkDisplay, singInWithGoogle}) {
-
+export default function LoginDemo({
+  email,
+  password,
+  loginFun,
+  btnText,
+  linkDisplay,
+  singInWithGoogle,
+}) {
   return (
     <div className="relative w-full h-screen bg-[#eee] ">
       <div className="flex justify-center items-center h-full">
-      {/* form */}
+        {/* form */}
         <form className="max-w-[400px] w-full mx-auto sm:h-auto h-fit bg-white p-16">
           <h1 className="text-4xl font-bold text-center py-4">AA.</h1>
-          <h1 className="text-lg font-bold py-5 underline decoration-solid">{btnText}</h1>
+          <h1 className="text-lg font-bold py-5 underline decoration-solid">
+            {btnText}
+          </h1>
           <div className="flex flex-col mb-4">
             <label className="flex items-start">Username</label>
             {/* input for email */}
@@ -24,7 +30,7 @@ export default function LoginDemo({email, password, loginFun, btnText, linkDispl
           </div>
           <div className="flex flex-col mb-4">
             <label className="flex items-start">Password</label>
-        {/* input for password */}
+            {/* input for password */}
             <input
               onChange={(e) => password(e.target.value)}
               className="border relative bg-gray-100 p-2"
@@ -33,20 +39,23 @@ export default function LoginDemo({email, password, loginFun, btnText, linkDispl
           </div>
           {/* button */}
           <button
-            onClick={(e)=> loginFun(e)}
+            onClick={(e) => loginFun(e)}
             className="w-full py-3 bg-[#2d2d2d] hover:bg-[#aaa] relative text-[#fff]"
           >
-           {btnText}
+            {btnText}
           </button>
-          <Link to="/register" style={{display: `${linkDisplay}`}}>
-          <p className='text-center mt-8' >Not a member? Sing up now</p>
-            </Link>
-            {/* another div for login with google  */}
-          <div  style={{display: `${linkDisplay}`}}className="flex justify-center mt-5 p-4">
-            {/* <p className="border shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
-              <AiFillFacebook className="text-xl" />
-            </p> */}
-            <p onClick={singInWithGoogle} className="border border-[#2d2d2d] shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center">
+          <Link to="/register" style={{ display: `${linkDisplay}` }}>
+            <p className="text-center mt-8">Not a member? Sing up now</p>
+          </Link>
+          {/* another div for login with google  */}
+          <div
+            style={{ display: `${linkDisplay}` }}
+            className="flex justify-center mt-5 p-4"
+          >
+            <p
+              onClick={singInWithGoogle}
+              className="border border-[#2d2d2d] shadow-lg hover:shadow-xl px-14 py-3 relative flex items-center"
+            >
               <FcGoogle />
             </p>
           </div>

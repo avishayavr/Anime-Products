@@ -1,14 +1,16 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import {auth} from '../FirebaseSingup/firebaseConfig'
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import { auth } from "../FirebaseSingup/firebaseConfig";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { useState, useEffect } from "react";
-import LoginDemo from './templateDemo';
-import { useAuthState } from 'react-firebase-hooks/auth'
-
+import LoginDemo from "./templateDemo";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Login() {
-
   const navigate = useNavigate();
 
   const [user] = useAuthState(auth);
@@ -17,39 +19,41 @@ export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-// login function 
+  // login function
   const login = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-     const user = await signInWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
       navigate("/products");
-      // console.log(user);
     } catch (error) {
       console.log({ msg: error });
     }
   };
 
-
   // login with google fun
-  const singInWithGoogle = () =>{
-    const provider = new GoogleAuthProvider
-    signInWithPopup(auth, provider)
-    // console.log(provider);
-  }
+  const singInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  };
 
   // use effect to authorization
-  useEffect(()=>{
-    if(user) navigate('/')
-  },[user])
-
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return (
     <div>
-        <LoginDemo email={setLoginEmail} password={setLoginPassword} loginFun={login} singInWithGoogle={singInWithGoogle} btnText={'Sing In'}/>
+      <LoginDemo
+        email={setLoginEmail}
+        password={setLoginPassword}
+        loginFun={login}
+        singInWithGoogle={singInWithGoogle}
+        btnText={"Sing In"}
+      />
     </div>
-  )
+  );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { BsInstagram, BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
 
 export default function App() {
+  // array for links and icons
   const links = [
     {
       icon: <BsFacebook />,
