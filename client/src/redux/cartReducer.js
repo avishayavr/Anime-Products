@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
       let data1 = [...state.value];
       const index1 = data1.findIndex((product) => product._id == id1);
       data1[index1].productQuantity += 1; 
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     // function to decrease the product quantity
     decreaseQuantity:(state, action) =>{
@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
       let data2 = [...state.value];
       const index2 = data2.findIndex((product) => product._id == id2);
       data2[index2].productQuantity -= 1; 
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     // function to delete the product from cart
     deleteProduct: (state, action) => {

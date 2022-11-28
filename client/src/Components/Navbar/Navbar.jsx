@@ -1,8 +1,6 @@
 import React from "react";
-import {useNavigate } from "react-router-dom";
+import {useNavigate, Link } from "react-router-dom";
 import { BsFillBagFill } from "react-icons/bs";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
@@ -17,7 +15,7 @@ export default function Navbar({openCart, logOut, user}) {
     <div className="bg-black flex justify-between items-center">
       {/* left side of the navbar */}
       <div className="flex items-center text-[#fff]">
-        <h1 className="p-3 font-bold text-4xl">AA.</h1>
+        <Link to="/"><h1 className="p-3 font-bold text-4xl hover:text-[#fff]">AA.</h1></Link>
         {/* div for links and log out */}
         <div className="flex p-3">
           <button

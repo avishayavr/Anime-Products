@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import ProductDemo from "./ProductDemo";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import ProductRelative from "./ProductRelative";
 
 export default function Product() {
   const [product, setProduct] = useState({}) 
@@ -14,8 +13,6 @@ export default function Product() {
   const getProduct = async () =>{
     const {data} = await axios.get(`http://localhost:8000/api/products/${id}`)
     setProduct(data)
-    console.log(id);
-    console.log(data);
   }
 
   

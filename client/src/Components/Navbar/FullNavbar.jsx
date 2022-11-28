@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Cart from "../CartAndCheckout/Cart";
 import Navbar from "./Navbar";
 import {auth} from "../FirebaseSingup/firebaseConfig"
@@ -26,10 +26,6 @@ export default function FullNavbar() {
     signOut(auth);
     navigate("/");
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   return (
     <div>

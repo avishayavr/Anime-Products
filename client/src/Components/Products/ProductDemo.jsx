@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/cartReducer";
 
@@ -17,8 +17,7 @@ export default function ProductDemo({ productData }) {
       productPrice: Number(productData.price),
       image: productData.image,
       productQuantity : 1,
-      // totalProductPrice : 0
-    };
+        };
     if(isProductExist) return "product exist"
     dispatch(addProduct(cartProduct))
   };
@@ -48,7 +47,7 @@ export default function ProductDemo({ productData }) {
             onClick={addToCart}
             disabled={productData?.quantity == 0 ? true : false}
             type="submit"
-            className="flex w-full justify-center mb-5  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] py-3 px-8 text-base font-medium text-white hover:bg-[#fff] hover:text-[#2d2d2d]"
+            className="flex w-full justify-center mb-5  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] hover:text-[#2d2d2d] text-[#fff] hover:bg-[#fff] py-3 px-8 text-base font-medium "
           >
             Add To Cart
           </button>

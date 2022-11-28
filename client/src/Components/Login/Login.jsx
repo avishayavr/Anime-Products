@@ -43,7 +43,7 @@ export default function Login() {
 
   // use effect to authorization
   useEffect(()=>{
-    if(user) navigate('/products')
+    if(user) navigate('/')
   },[user])
 
 

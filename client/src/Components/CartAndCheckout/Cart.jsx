@@ -3,7 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import CheckoutBtn from "./CheckoutBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseQuantity, decreaseQuantity, deleteProduct } from "../../redux/cartReducer";
@@ -13,17 +12,16 @@ export default function Cart({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const [totalPrice, setTotalPrice] = useState(0);
-  // const [productQuantity, setProductQuantity] = useState(1);
 
   // function to get the total price
-  // const totalPriceFun = () => {
-  //   let counter = 0;
-  //   cart?.map((product) => {
-  //     counter = counter + (+product.productPrice * productQuantity);
-  //   });
-  //   setTotalPrice(counter);
-  //   // console.log(counter);
-  // };
+  const totalPriceFun = () => {
+    let counter = 0;
+    cart?.map((product) => {
+      counter += (product.productQuantity * product.productPrice
+        )
+    });
+    setTotalPrice(counter);
+  };
 
 
   // fun to delete product from cart
@@ -31,9 +29,9 @@ export default function Cart({ open, setOpen }) {
     dispatch(deleteProduct(obj));
   };
 
-  // useEffect(() => {
-  //   totalPriceFun();
-  // }, [cart]);
+  useEffect(() => {
+    totalPriceFun();
+  }, [cart]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
