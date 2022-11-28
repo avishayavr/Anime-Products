@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart, updateCart } from "../../redux/cartReducer";
+import { addProduct } from "../../redux/cartReducer";
 
 
 export default function ProductDemo({ productData }) {
@@ -16,9 +16,11 @@ export default function ProductDemo({ productData }) {
       title: productData.title,
       productPrice: Number(productData.price),
       image: productData.image,
+      productQuantity : 1,
+      // totalProductPrice : 0
     };
     if(isProductExist) return "product exist"
-    dispatch(getCart(cartProduct))
+    dispatch(addProduct(cartProduct))
   };
 
   return (

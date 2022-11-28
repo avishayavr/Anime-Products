@@ -17,7 +17,6 @@ export default function SectionOne() {
   const getData = async ()=>{
     const { data } = await axios.get("http://localhost:8000/api/products");
     setProducts(data);
-    // console.log(data);
   }
 
   useEffect(() => {

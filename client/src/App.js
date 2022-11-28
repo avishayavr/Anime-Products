@@ -8,7 +8,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import CheckoutSuccess from "./Components/CartAndCheckout/CheckoutSuccess";
 import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
-import { getCart } from "./redux/cartReducer";
+import { addProduct } from "./redux/cartReducer";
 import { useEffect } from "react";
 
 
@@ -26,7 +26,7 @@ function App() {
       storage.push(JSON.parse(sessionStorage.getItem(key)))
     })
      
-    if (storage.length == 0) storage.map(product => dispatch(getCart(product)))
+    if (storage.length == 0) storage.map(product => dispatch(addProduct(product)))
     // console.log(cart);
   };
 

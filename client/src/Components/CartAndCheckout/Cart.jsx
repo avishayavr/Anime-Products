@@ -6,32 +6,34 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import CheckoutBtn from "./CheckoutBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct } from "../../redux/cartReducer"
+import { increaseQuantity, decreaseQuantity, deleteProduct } from "../../redux/cartReducer";
 
 export default function Cart({ open, setOpen }) {
   const cart = useSelector((state) => state.cart.value);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [totalPrice, setTotalPrice] = useState(0);
+  // const [productQuantity, setProductQuantity] = useState(1);
 
   // function to get the total price
-  const totalPriceFun = () => {
-    let counter = 0;
-    cart?.map(product =>{
-     counter = counter + product.productPrice
-    }) 
-    setTotalPrice(counter);
-  }
+  // const totalPriceFun = () => {
+  //   let counter = 0;
+  //   cart?.map((product) => {
+  //     counter = counter + (+product.productPrice * productQuantity);
+  //   });
+  //   setTotalPrice(counter);
+  //   // console.log(counter);
+  // };
 
-  // fun to delete product from cart 
-  const deleteProductFun = (obj) =>{
-    dispatch(deleteProduct(obj))
-  }
 
-  useEffect(()=>{
-    totalPriceFun();
-  },[cart])
+  // fun to delete product from cart
+  const deleteProductFun = (obj) => {
+    dispatch(deleteProduct(obj));
+  };
 
+  // useEffect(() => {
+  //   totalPriceFun();
+  // }, [cart]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -85,47 +87,62 @@ export default function Cart({ open, setOpen }) {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {
-                              cart?.map((product, i) => (
-                                <li key={i} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src={product.image}
-                                      className="h-full w-full object-cover object-center"
-                                    />
-                                  </div>
+                            {cart?.map((product, i) => (
+                              <li key={i} className="flex py-6">
+                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <img
+                                    src={product.image}
+                                    className="h-full w-full object-cover object-center"
+                                  />
+                                </div>
 
-                                  <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
-                                          {product.title}
-                                        </h3>
-                                        <p className="ml-4">{product.productPrice}</p>
-                                      </div>
+                                <div className="ml-4 flex flex-1 flex-col">
+                                  <div>
+                                    <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <h3>{product.title}</h3>
+                                      <p className="ml-4">
+                                        ${+product.productPrice *
+                                          +product.productQuantity}
+                                      </p>
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <div className="flex justify-between">
+                                  </div>
+                                  <div className="flex flex-1 items-end justify-between text-sm">
+                                    <div className="flex justify-between">
                                       {/* <input type="number" onChange={(e)=> updateQuantity(e.target.value, product)}/> */}
-                                      {/* <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(1, product,e)}>+</button> */}
-                                      {/* {productQuantity} */}
-                                      {/* <button className="bg-[#2d2d2d] text-white p-1" onClick={(e)=>updateQuantity(-1, product,e)}>-</button> */}
-                                      </div>
+                                      <button
+                                        className="bg-[#2d2d2d] text-white p-1"
+                                        onClick={() => 
+                                          dispatch(increaseQuantity(product))
+                                        }
+                                      >
+                                        +
+                                      </button>
+                                      <h1 >{product.productQuantity}</h1>
+                                      <button
+                                        className="bg-[#2d2d2d] text-white p-1"
+                                        onClick={(e) => 
+                                          dispatch(decreaseQuantity(product))
+                                        }
+                                      >
+                                        -
+                                      </button>
+                                    </div>
 
-                                      <div className="flex">
-                                        <button
-                                        onClick={()=>deleteProductFun(product)}
-                                          type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
-                                        >
-                                          Remove
-                                        </button>
-                                      </div>
+                                    <div className="flex">
+                                      <button
+                                        onClick={() =>
+                                          deleteProductFun(product)
+                                        }
+                                        type="button"
+                                        className="font-medium text-[#2d2d2d]-600"
+                                      >
+                                        Remove
+                                      </button>
                                     </div>
                                   </div>
-                                </li>
-                              ))
-                            }
+                                </div>
+                              </li>
+                            ))}
                           </ul>
                         </div>
                       </div>
@@ -136,23 +153,7 @@ export default function Cart({ open, setOpen }) {
                         <p>Subtotal</p>
                         <p>${totalPrice}</p>
                       </div>
-                      {/* <p className="mt-0.5 text-sm text-gray-500">
-                        Shipping and taxes calculated at checkout.
-                      </p> */}
-                       <CheckoutBtn cartItems={cart}/>
-                      {/* <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
-                          or
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
-                          </button>
-                        </p>
-                      </div> */}
+                      <CheckoutBtn cartItems={cart} />
                     </div>
                   </div>
                 </Dialog.Panel>

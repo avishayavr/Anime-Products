@@ -29,7 +29,7 @@ const features = [
   ]
 export default function SectionTwo() {
   return (
-      <div className="bg-[#fff] opacity-60 py-24 sm:py-32 lg:py-40 m-3 rounded-xl">
+      <div className="bg-[#fff] opacity-60 py-24 sm:py-32 lg:py-40 m-5 rounded-xl">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="sm:text-center">
           <h2 className="text-lg font-semibold leading-8 text-[#2d2d2d]">Transactions</h2>
