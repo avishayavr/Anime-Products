@@ -1,5 +1,6 @@
 import React from "react";
 import { BsInstagram, BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
+import ContactFooter from "./ContactFooter";
 
 export default function App() {
   // array for links and icons
@@ -29,7 +30,9 @@ export default function App() {
           })}
         </div>
       </div>
-
+      <div className="flex justify-center">
+      <ContactFooter/>
+      </div>
       <div className="text-center p-3 bg-[#2d2d2d]">
         © 2020 Copyright:
         <a className="text-[#fff]" href="https://mdbootstrap.com/">

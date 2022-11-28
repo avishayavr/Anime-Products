@@ -8,7 +8,7 @@ export default function ProductTemplate() {
 
   // function tpo get data using axios
   const getData = async () => {
-    const { data } = await axios.get("http://localhost:8000/api/products");
+    const { data } = await axios.get("https://nice-ox-windbreaker.cyclic.app/api/products");
     setProductsData(data);
   };
 

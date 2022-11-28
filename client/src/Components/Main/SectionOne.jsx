@@ -11,100 +11,125 @@ import {
 import axios from "axios";
 
 export default function SectionOne() {
-  const [products, setProducts] = useState([]);
-  const [index, setIndex] = useState(Math.floor(Math.random() * 8));
+  // const words = ["figure", "shirt", "poster", "hoodie"]
+  // const [products, setProducts] = useState([]);
+  // const [index, setIndex] = useState(Math.floor(Math.random() * 8));
 
-  const getData = async () => {
-    const { data } = await axios.get("http://localhost:8000/api/products");
-    setProducts(data);
-  };
+  // const getData = async () => {
+  //   const { data } = await axios.get("http://localhost:8000/api/products");
+  //   // let newData = [...data];
+  //   // let filterData = newData.filter(product =>product.title.toLowerCase.includes(words[index]));
+  //   setProducts(filterData);
+  //   newData = [...data];
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
   return (
-    <div className="my-5 mx-3 sm:bg-[#fff] sm:opacity-60 rounded-xl">
-      <h1 className="text-2xl text-[#fff] sm:text-[#2d2d2d] my-3">
-        Some Products
-      </h1>
-      <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-        <MDBCol>
-          <MDBCard className="m-2 sm:m-0">
-            <MDBCardImage
-              src={products[index]?.image}
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle className="text-xl">
-                {products[index]?.title}
-              </MDBCardTitle>
-              <MDBCardText>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol>
-          <MDBCard className="m-2 sm:m-0">
-            <MDBCardImage
-              src={products[index + 1]?.image}
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle className="text-xl">
-                {products[index + 1]?.title}
-              </MDBCardTitle>
-              <MDBCardText>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol>
-          <MDBCard className="m-2 sm:m-0">
-            <MDBCardImage
-              src={products[index + 2]?.image}
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle className="text-xl">
-                {products[index + 2]?.title}
-              </MDBCardTitle>
-              <MDBCardText>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol>
-          <MDBCard className="m-2 sm:m-0">
-            <MDBCardImage
-              src={products[index + 3]?.image}
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle className="text-xl">
-                {products[index + 3]?.title}
-              </MDBCardTitle>
-              <MDBCardText>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+    // <!-- Container for demo purpose -->
+    <div className="container my-24 px-6 mx-auto">
+      {/* <!-- Section: Design Block --> */}
+      <section className="mb-32 text-[#fff] md:text-left">
+        <h2 className="text-3xl font-bold mb-12 text-center">
+          Latest articles
+        </h2>
+
+        <div className="flex flex-wrap mb-6">
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
+            <div
+              className="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              <img
+                src="https://i.pinimg.com/236x/d8/dc/2c/d8dc2c58ac1b24e1076b8f2394843b51.jpg"
+                className="w-full"
+                alt="Louvre"
+              />
+              <a href="#!">
+                <div
+                  className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                  style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                ></div>
+              </a>
+            </div>
+          </div>
+
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
+            <h5 className="text-lg font-bold mb-3">Naruto Shipuden</h5>
+            <p className="text-[#fff]">
+              Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat
+              vulputate. Ut vulputate est non quam dignissim elementum. Donec a
+              ullamcorper diam.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap mb-6">
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
+            <div
+              className="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              <img
+                src="https://i.pinimg.com/236x/18/ec/fc/18ecfcf2ba20683f56417a920337e564.jpg"
+                className="w-full"
+                alt="Louvre"
+              />
+              <a href="#!">
+                <div
+                  className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                  style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                ></div>
+              </a>
+            </div>
+          </div>
+
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
+            <h5 className="text-lg font-bold mb-3">Demon Slayer</h5>
+            <p className="text-[#fff]">
+              Suspendisse in volutpat massa. Nulla facilisi. Sed aliquet diam
+              orci, nec ornare metus semper sed. Integer volutpat ornare erat
+              sit amet rutrum.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap mb-6">
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
+            <div
+              className="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              <img
+                src="https://i.pinimg.com/236x/70/e9/d1/70e9d19535e48baa84842cfef880da08.jpg"
+                className="w-full"
+                alt="Louvre"
+              />
+              <a href="#!">
+                <div
+                  className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                  style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                ></div>
+              </a>
+            </div>
+          </div>
+
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
+            <h5 className="text-lg font-bold mb-3">Dragon Ball</h5>
+            <p className="text-[#fff]">
+              Curabitur tristique, mi a mollis sagittis, metus felis mattis
+              arcu, non vehicula nisl dui quis diam. Mauris ut risus eget massa
+              volutpat feugiat. Donec.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/* <!-- Section: Design Block --> */}
     </div>
+    // <!-- Container for demo purpose -->
   );
 }

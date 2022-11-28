@@ -11,8 +11,8 @@ export default function HomePage() {
       <div className='container'>
       <FullNavbar/>
       <Header/>
-      <SectionTwo/>
       <SectionOne/>
+      <SectionTwo/>
       <Footer/>
     </div>
     </div>

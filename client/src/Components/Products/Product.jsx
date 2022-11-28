@@ -11,7 +11,7 @@ export default function Product() {
   // get the product data
   const getProduct = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/api/products/${id}`
+      `https://nice-ox-windbreaker.cyclic.app/api/products/${id}`
     );
     setProduct(data);
   };
