@@ -6,10 +6,13 @@ import ProductPage from "./Pages/ProductPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import CheckoutSuccess from "./Components/CartAndCheckout/CheckoutSuccess";
+import FullNavbar from "./Components/Navbar/FullNavbar";
+
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-[#2d2d2d] dark:bg-[#fff]">
+      <FullNavbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="products" element={<ProductsPage />} />

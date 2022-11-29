@@ -11,26 +11,12 @@ import {
 import axios from "axios";
 
 export default function SectionOne() {
-  // const words = ["figure", "shirt", "poster", "hoodie"]
-  // const [products, setProducts] = useState([]);
-  // const [index, setIndex] = useState(Math.floor(Math.random() * 8));
-
-  // const getData = async () => {
-  //   const { data } = await axios.get("http://localhost:8000/api/products");
-  //   // let newData = [...data];
-  //   // let filterData = newData.filter(product =>product.title.toLowerCase.includes(words[index]));
-  //   setProducts(filterData);
-  //   newData = [...data];
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+ 
   return (
     // <!-- Container for demo purpose -->
-    <div className="container my-24 px-6 mx-auto">
+    <div className="my-24 px-6 mx-auto">
       {/* <!-- Section: Design Block --> */}
-      <section className="mb-32 text-[#fff] md:text-left">
+      <section className="mb-32 text-[#fff] dark:text-[#2d2d2d] md:text-left">
         <h2 className="text-3xl font-bold mb-12 text-center">
           Latest articles
         </h2>
@@ -58,7 +44,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Naruto Shipuden</h5>
-            <p className="text-[#fff]">
+            <p className="text-[#fff] dark:text-[#2d2d2d]">
               Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat
               vulputate. Ut vulputate est non quam dignissim elementum. Donec a
               ullamcorper diam.
@@ -89,7 +75,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Demon Slayer</h5>
-            <p className="text-[#fff]">
+            <p className="text-[#fff] dark:text-[#2d2d2d]">
               Suspendisse in volutpat massa. Nulla facilisi. Sed aliquet diam
               orci, nec ornare metus semper sed. Integer volutpat ornare erat
               sit amet rutrum.
@@ -120,7 +106,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Dragon Ball</h5>
-            <p className="text-[#fff]">
+            <p className="text-[#fff] dark:text-[#2d2d2d]">
               Curabitur tristique, mi a mollis sagittis, metus felis mattis
               arcu, non vehicula nisl dui quis diam. Mauris ut risus eget massa
               volutpat feugiat. Donec.

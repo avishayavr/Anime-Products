@@ -6,9 +6,9 @@ import Footer from "../Components/Footer/Footer"
 
 export default function ProductsPage() {
   return (
-    <div className='bg-[#2d2d2d]'>
+    <div >
       <div className='container '>
-      <FullNavbar/>
+      {/* <FullNavbar/> */}
       <Products/>
       <Footer/>
     </div>

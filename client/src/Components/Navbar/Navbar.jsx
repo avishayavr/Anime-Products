@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { BsFillBagFill } from "react-icons/bs";
+// import { MdOutlineLightMode } from "react-icons/md";
 import { useSelector } from "react-redux";
+import DisplayMode from "./DisplayMode";
 
-export default function Navbar({ openCart, logOut, user }) {
+export default function Navbar({ openCart, logOut, user, changeBgFun }) {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart.value);
@@ -37,7 +39,12 @@ export default function Navbar({ openCart, logOut, user }) {
       </div>
 
       {/* right side of the navbar */}
-      <div
+     <div className="flex items-center">
+     {/* <div>
+        <MdOutlineLightMode className="text-4xl text-[#fff]" onClick={()=> changeBgFun()}/>
+      </div> */}
+      <DisplayMode/>
+     <div
         onClick={openCart}
         className={
           user
@@ -48,6 +55,7 @@ export default function Navbar({ openCart, logOut, user }) {
         <BsFillBagFill className="text-4xl" />
         <span className="absolute top-6  text-[#2d2d2d]">{cart?.length}</span>
       </div>
+     </div>
     </div>
   );
 }

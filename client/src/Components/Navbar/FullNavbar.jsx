@@ -26,7 +26,7 @@ export default function FullNavbar() {
   };
 
   return (
-    <div>
+    <div className="container">
       <Navbar openCart={openCartFun} logOut={logOutFun} user={user} />
       <Cart open={open} setOpen={setOpen} />
     </div>
