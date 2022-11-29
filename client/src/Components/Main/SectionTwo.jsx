@@ -34,16 +34,16 @@ const features = [
 ];
 export default function SectionTwo() {
   return (
-    <div className="bg-[#fff] opacity-60 py-24 sm:py-32 lg:py-40 m-5 rounded-xl">
+    <div className="bg-[#fff] opacity-60 dark:opacity-100 py-24 sm:py-32 lg:py-40 m-5 rounded-xl">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="sm:text-center">
-          <h2 className="text-lg font-semibold leading-8 text-[#2d2d2d]">
+          <h2 className="text-lg font-semibold leading-8 text-[#2d2d2d] dark:text-black ">
             Transactions
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-[#2d2d2d] sm:text-4xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-[#2d2d2d] dark:text-black sm:text-4xl">
             A better way to shop{" "}
           </p>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-black">
             Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
             voluptatum cupiditate veritatis in accusamus quisquam.
           </p>
@@ -56,14 +56,14 @@ export default function SectionTwo() {
                 key={feature.name}
                 className="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2d2d2d] text-[#fff] sm:shrink-0">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2d2d2d] dark:bg-black text-[#fff] sm:shrink-0">
                   <feature.icon className="h-8 w-8" aria-hidden="true" />
                 </div>
                 <div className="sm:min-w-0 sm:flex-1">
-                  <p className="text-lg font-semibold leading-8 text-[#2d2d2d]">
+                  <p className="text-lg font-semibold leading-8 text-[#2d2d2d] dark:text-black">
                     {feature.name}
                   </p>
-                  <p className="mt-2 text-base leading-7 text-gray-600">
+                  <p className="mt-2 text-base leading-7 text-gray-600 dark:text-black">
                     {feature.description}
                   </p>
                 </div>

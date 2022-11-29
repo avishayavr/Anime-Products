@@ -24,7 +24,7 @@ export default function ProductDemo({ productData }) {
   };
 
   return (
-    <div className="bg-[#aaa] rounded-xl  flex flex-col lg:flex-row justify-evenly m-5">
+    <div className="bg-[#aaa] dark:bg-black  dark:text-[#fff] rounded-xl flex flex-col lg:flex-row justify-evenly m-5">
       {/* left side */}
       <div className="flex items-center p-10 lg:w-2/5">
         <img
@@ -38,12 +38,11 @@ export default function ProductDemo({ productData }) {
       <div className="lg:p-10 flex justify-between flex-col text-xl w-full  lg:w-2/5">
         <div className="topRightSide">
           {/* div for text  */}
-          <div className="p-5 flex flex-col md:flex-row md:justify-between text-[#2d2d2d]">
+          <div className="p-5 flex flex-col md:flex-row md:justify-between text-[#2d2d2d] dark:text-[#fff]">
             <h1 className="font-bold">{productData?.title}</h1>
             <p className="flex justify-start font-bold">
               {productData?.price}$
             </p>
-            {/* <p className="flex justify-start">qu:{productData?.quantity}</p> */}
           </div>
           {/* button */}
           <button

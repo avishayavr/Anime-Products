@@ -14,14 +14,14 @@ export default function SectionOne() {
  
   return (
     // <!-- Container for demo purpose -->
-    <div className="my-24 px-6 mx-auto">
+    <div className="my-24 px-6 mx-auto dark:bg-black rounded-3xl">
       {/* <!-- Section: Design Block --> */}
-      <section className="mb-32 text-[#fff] dark:text-[#2d2d2d] md:text-left">
+      <section className="mb-32 text-[#fff] md:text-left">
         <h2 className="text-3xl font-bold mb-12 text-center">
           Latest articles
         </h2>
 
-        <div className="flex flex-wrap mb-6">
+        <div className="flex flex-wrap mb-6 ">
           <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
             <div
               className="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
@@ -30,7 +30,7 @@ export default function SectionOne() {
             >
               <img
                 src="https://i.pinimg.com/236x/d8/dc/2c/d8dc2c58ac1b24e1076b8f2394843b51.jpg"
-                className="w-full"
+                className="w-full "
                 alt="Louvre"
               />
               <a href="#!">
@@ -44,7 +44,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Naruto Shipuden</h5>
-            <p className="text-[#fff] dark:text-[#2d2d2d]">
+            <p className="text-[#fff]">
               Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat
               vulputate. Ut vulputate est non quam dignissim elementum. Donec a
               ullamcorper diam.
@@ -75,7 +75,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Demon Slayer</h5>
-            <p className="text-[#fff] dark:text-[#2d2d2d]">
+            <p className="text-[#fff]">
               Suspendisse in volutpat massa. Nulla facilisi. Sed aliquet diam
               orci, nec ornare metus semper sed. Integer volutpat ornare erat
               sit amet rutrum.
@@ -106,7 +106,7 @@ export default function SectionOne() {
 
           <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
             <h5 className="text-lg font-bold mb-3">Dragon Ball</h5>
-            <p className="text-[#fff] dark:text-[#2d2d2d]">
+            <p className="text-[#fff]">
               Curabitur tristique, mi a mollis sagittis, metus felis mattis
               arcu, non vehicula nisl dui quis diam. Mauris ut risus eget massa
               volutpat feugiat. Donec.
