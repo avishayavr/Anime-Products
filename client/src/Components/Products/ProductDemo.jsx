@@ -36,7 +36,7 @@ export default function ProductDemo({ productData }) {
 
       {/* right side */}
       <div className="lg:p-10 flex justify-between flex-col text-xl w-full  lg:w-2/5">
-        <div className="topRightSide">
+        <div className="topRightSide flex flex-col items-center">
           {/* div for text  */}
           <div className="p-5 flex flex-col md:flex-row md:justify-between text-[#2d2d2d] dark:text-[#fff]">
             <h1 className="font-bold">{productData?.title}</h1>
@@ -49,7 +49,7 @@ export default function ProductDemo({ productData }) {
             onClick={addToCart}
             disabled={productData?.quantity == 0 ? true : false}
             type="submit"
-            className="flex w-full justify-center mb-5  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] hover:text-[#2d2d2d] text-[#fff] hover:bg-[#fff] py-3 px-8 text-base font-medium "
+            className="flex justify-center w-4/5 mb-5  rounded-md border-2 border-transparent  hover:border-[#2d2d2d] bg-[#2d2d2d] hover:text-[#2d2d2d] text-[#fff] hover:bg-[#fff] py-3 px-8 text-base font-medium "
           >
             Add To Cart
           </button>

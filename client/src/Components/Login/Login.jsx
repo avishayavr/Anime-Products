@@ -34,6 +34,21 @@ export default function Login() {
     }
   };
 
+  // login as a guest
+const loginAsGuest = async()=>{
+  // setLoginEmail("guest99@gmail.com");
+  // setLoginPassword("guest99");
+  try {
+    const user = await signInWithEmailAndPassword(
+      auth,
+      "guest99@gmail.com",
+      "guest99"
+    );
+    navigate("/products");
+  } catch (error) {
+    console.log({ msg: error });
+  }}
+
   // login with google fun
   const singInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -52,6 +67,7 @@ export default function Login() {
         password={setLoginPassword}
         loginFun={login}
         singInWithGoogle={singInWithGoogle}
+        loginAsGuest={loginAsGuest}
         btnText={"Sing In"}
       />
     </div>

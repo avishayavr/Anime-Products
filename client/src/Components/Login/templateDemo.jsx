@@ -9,6 +9,7 @@ export default function LoginDemo({
   btnText,
   linkDisplay,
   singInWithGoogle,
+  loginAsGuest
 }) {
   return (
     <div className="relative w-full h-screen bg-[#eee] ">
@@ -44,9 +45,15 @@ export default function LoginDemo({
           >
             {btnText}
           </button>
-          <Link to="/register" style={{ display: `${linkDisplay}` }}>
+          {/* <Link to="/register" style={{ display: `${linkDisplay}` }}>
             <p className="text-center mt-8">Not a member? Sing up now</p>
-          </Link>
+          </Link> */}
+          {/* <Link to="/products" style={{ display: `${linkDisplay}` }}> */}
+          <p
+            onClick={()=> loginAsGuest()}
+            className="text-center mt-8 cursor-pointer">
+            Log in as a guest</p>
+          {/* </Link> */}
           {/* another div for login with google  */}
           <div
             style={{ display: `${linkDisplay}` }}

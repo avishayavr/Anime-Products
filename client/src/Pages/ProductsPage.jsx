@@ -8,7 +8,7 @@ export default function ProductsPage() {
   return (
     <div >
       <div className='container '>
-      {/* <FullNavbar/> */}
+      <FullNavbar/>
       <Products/>
       <Footer/>
     </div>

@@ -47,8 +47,8 @@ export default function Navbar({ openCart, logOut, user, changeBgFun }) {
      <div
         onClick={openCart}
         className={
-          user
-            ? "text-[#fff] relative flex justify-center p-3 hover:cursor-pointer"
+          user?
+           "text-[#fff] relative flex justify-center p-3 hover:cursor-pointer"
             : "hidden"
         }
       >
