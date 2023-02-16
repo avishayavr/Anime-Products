@@ -5,14 +5,14 @@ import ProductsPage from "./Pages/ProductsPage";
 import ProductPage from "./Pages/ProductPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
-import CheckoutSuccess from "./Components/CartAndCheckout/CheckoutSuccess";
-// import FullNavbar from "./Components/Navbar/FullNavbar";
+import CheckoutSuccess from "./Pages/CheckoutSuccessPage";
 
 
 function App() {
   return (
-    <div className="App bg-[#2d2d2d] dark:bg-[#fff]">
-      {/* <FullNavbar /> */}
+    <div 
+    // className="App bg-[#2d2d2d] dark:bg-[#fff]"
+    >
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="products" element={<ProductsPage />} />
