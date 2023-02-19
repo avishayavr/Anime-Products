@@ -11,7 +11,7 @@ import CheckoutSuccess from "./Pages/CheckoutSuccessPage";
 function App() {
   return (
     <div 
-    // className="App bg-[#2d2d2d] dark:bg-[#fff]"
+    className="App bg-[#2d2d2d] dark:bg-[#fff]"
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
