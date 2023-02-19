@@ -5,7 +5,9 @@ import Footer from "../Components/Footer/Footer";
 
 export default function ProductPage() {
   return (
-    <div >
+    <div 
+    className="App bg-[#2d2d2d] dark:bg-[#fff]"
+    >
       <div className="container ">
         <FullNavbar />
         <Product />
