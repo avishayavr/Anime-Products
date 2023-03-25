@@ -5,7 +5,7 @@ const CheckoutBtn = ({ cartItems }) => {
   const handleCheckout = () => {
     // adding data to and url to checkout page
     axios
-      .post("http://localhost:8000/api/stripe/create-checkout-session", {
+      .post("https://nice-ox-windbreaker.cyclic.app/api/stripe/create-checkout-session", {
         cartItems,
         userId: 1,
       })
@@ -19,7 +19,7 @@ const CheckoutBtn = ({ cartItems }) => {
 
   return (
     <div onClick={() => handleCheckout()}>
-      <div className="mt-6">
+      <div className="mt-6 cursor-pointer">
         <p className="flex items-center justify-center rounded-md border border-transparent  px-6 py-3 text-base font-medium shadow-sm bg-[#2d2d2d] text-[#fff] hover:bg-[#fff] hover:text-[#2d2d2d]">
           Checkout
         </p>
